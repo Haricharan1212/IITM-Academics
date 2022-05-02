@@ -7,5 +7,5 @@ General Stuff:
 - Midterm exam -> 15%
 - Final exam -> 30%
 
-![600](WhatsApp%20Image%202022-05-02%20at%209.01.05%20AM.jpeg)
+![600](../Images/WhatsApp%20Image%202022-05-02%20at%209.01.05%20AM.jpeg)
 

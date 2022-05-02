@@ -4,7 +4,7 @@
 
 Week 1 outline!
 
-![600](Pasted%20image%2020220502083915.png)
+![600](../Images/Pasted%20image%2020220502083915.png)
 
 **What are the advantages of digital systems?**
 - Resilience to noise -> Noise forms a Gaussian distribution around the actual value. Filtering analog signals is hard, especially with noise.
@@ -27,7 +27,7 @@ Week 1 outline!
 	- Combinational logic
 
 **Blocks in a Mobile Phone!**
-![300](Pasted%20image%2020220502082603.png)
+![300](../Images/Pasted%20image%2020220502082603.png)
 
 **What is a system on a chip?**
 Microprocesser | Microcontroller
@@ -40,7 +40,7 @@ CLB-> configurable logic block
 Logic blocks-> consists of logic gates like NOR gates, AND gates, etc. and clocks
 
 **Combinational logic gate that does comparison**
-![300](Pasted%20image%2020220502083345.png)
+![300](../Images/Pasted%20image%2020220502083345.png)
 
 Sequential logic: uses clock cycles and does stuff, and synchronizes stuff
 
