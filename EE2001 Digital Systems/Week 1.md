@@ -27,6 +27,7 @@ Week 1 outline!
 	- Combinational logic
 
 **Blocks in a Mobile Phone!**
+
 ![300](../Images/Pasted%20image%2020220502082603.png)
 
 **What is a system on a chip?**
@@ -40,6 +41,7 @@ CLB-> configurable logic block
 Logic blocks-> consists of logic gates like NOR gates, AND gates, etc. and clocks
 
 **Combinational logic gate that does comparison**
+
 ![300](../Images/Pasted%20image%2020220502083345.png)
 
 Sequential logic: uses clock cycles and does stuff, and synchronizes stuff
