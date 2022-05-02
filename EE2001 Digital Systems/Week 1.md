@@ -44,7 +44,7 @@ Logic blocks-> consists of logic gates like NOR gates, AND gates, etc. and clock
 
 ![300](../Images/Pasted%20image%2020220502083345.png)
 
-Sequential logic: uses clock cycles and does stuff, and synchronizes stuff.
+Sequential logic: uses clock cycles and does stuff, and synchronizes stuff!
 
 
 
