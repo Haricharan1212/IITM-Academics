@@ -45,3 +45,53 @@ Logic blocks-> consists of logic gates like NOR gates, AND gates, etc. and clock
 ![300](../Images/Pasted%20image%2020220502083345.png)
 
 Sequential logic: uses clock cycles and does stuff, and synchronizes stuff!
+
+---
+## 3rd May
+Signals:
+1. Analog
+2. Digital signal -> discrete time signal
+
+**Any base to decimal conversion-> just multiply it out**
+
+$7392 = 7 \times 10^{3}+ 3 \times 10^{2}+ 9 \times 10^{1}+ 2 \times 10^0$
+
+$$a_{n}a_{n-1} ... a_{0}. a_{-1} ... a_{-m} = \sum_{i = -m}^{n} a_{i} \text{base}^i$$
+
+**Decimal to binary**:
+
+Eg. 41
+41 | Dividing by 2
+-- | --
+20 | 1
+10 | 0
+5|0
+2|1
+1|0
+0|1
+
+Then write it from bottom up
+Answer is *100101*.
+
+**Decimal to Octal**
+Eg. 153
+
+153 | 8
+-- | --
+19|1
+2|3
+0|2
+Answer *231*
+
+0.6875 in binary:
+$0.6875 \times 2 = 1, 0.3750$
+$0.3750 \times 2 = 0, 0.7500$
+$0.7500 \times 2 = 1, 0.5$
+$0.5000 \times 2 = 1, 0$
+
+The number is written top-down.
+0.1011
+
+**Binary, Hex, Octal conversion is lite, use 2, 4, and 3 digits respectively**
+
+8 bits makes up one byte (little children know this)
