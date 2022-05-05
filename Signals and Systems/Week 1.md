@@ -1,7 +1,8 @@
 # Signals and Systems
 ## 3rd May
 
-#### Some definitions
+### Signal
+#### Some definitions:
 *Signal:* Mathematical function that depends on some variables
 
 **Classification**
@@ -22,61 +23,17 @@
 	- Deterministic can be predicted
 	- Random cannot be predicted
 
-#### Continuous Time System
-Input Signal -> System -> Output Signal
-     x (t)                                     y(t)
-
-Eg. Some electric Circuit:
-![600](../Images/Pasted%20image%2020220504141625.png)
-
-$V_s = x(t)$
-$$i = \frac{V_s - V_{c}}{R} = C \frac{d V_{c}}{d t}$$
-$$\frac{d V_{c}}{dt}+ \frac{V_{c}}{RC} = \frac{V_s}{RC}$$
-
-Eg. Cart: This is similar to cart with friction: x(t) is the external force, a y(t) corresponds to friction.
-$$\frac{d y(t)}{dt} + a y(t) = b x(t)$$
-This is first-order system!
-
----
-#### Discrete Time system
-Input Signal -> System -> Output signal
-      x[n]                                     y[n]
-$n = 0, \pm 1, \pm 2, ...$
-
-Eg. Bank monthly balance:
-- y[n] is monthly balance
-- x[n] is net amount deposited = Deposit - Withdrawal
-- 1% Interest also
-
-$$y[n] = x[n] + 1.01 y [n-1]$$
-This is a difference equation
-
-Eg. For the same cart, it can be represented as DT also, where time would be like $\Delta n$.
-
-$\frac{d y(t)}{dt} + a y(t) = b x(t)$ becomes
-
-$$ \frac{v[n] - v[n-1]}{\Delta n} + \frac{\rho v[n]}{m} = \frac{f[n]}{m}$$
----
-**For CT-> Differential equation, For DT-> Difference equation**
-
-> [!INFO] Imp
-> If we come up with methods to solve one class of system, we can do same thing for other systems in same class.
-
-**We're worried only about LTI systems**
-
----
 #### Power and Energy
 For current and resistor:
 
 $$P(t) = i(t) v(t)$$
-$$E = \int_{t_1}^{t_{2}}p(t) dt$$
+$$E = \int_{t_1}^{t_{2}}P(t) dt$$
 Analogously, for any signal x(t):
 $$P(t) = |x(t)|^2$$
 $$E = \int_{t_1}^{t_{2}}|x(t)|^{2}dt$$
 $$P_{\text{avg}} = \frac{E}{t_{2}- t_1}$$
 
 ![](../Images/Pasted%20image%2020220504145648.png)
-
 
 ---
 If energy is finite, power is zero and is called **energy signal**.
@@ -160,6 +117,48 @@ r(t) = t u(t)
 $\delta(t) = \frac{d u(t)}{dt} = \frac{d^{2} r(t)}{d t^{2}}$
 ---
 
+### System
+#### Continuous Time System
+Input Signal -> System -> Output Signal
+     x (t)                                     y(t)
+
+Eg. Some electric Circuit:
+![600](../Images/Pasted%20image%2020220504141625.png)
+
+$V_s = x(t)$
+$$i = \frac{V_s - V_{c}}{R} = C \frac{d V_{c}}{d t}$$
+$$\frac{d V_{c}}{dt}+ \frac{V_{c}}{RC} = \frac{V_s}{RC}$$
+
+Eg. Cart: This is similar to cart with friction: x(t) is the external force, a y(t) corresponds to friction.
+$$\frac{d y(t)}{dt} + a y(t) = b x(t)$$
+This is first-order system!
+
+---
+#### Discrete Time system
+Input Signal -> System -> Output signal
+      x[n]                                     y[n]
+$n = 0, \pm 1, \pm 2, ...$
+
+Eg. Bank monthly balance:
+- y[n] is monthly balance
+- x[n] is net amount deposited = Deposit - Withdrawal
+- 1% Interest also
+
+$$y[n] = x[n] + 1.01 y [n-1]$$
+This is a difference equation
+
+Eg. For the same cart, it can be represented as DT also, where time would be like $\Delta n$.
+
+$\frac{d y(t)}{dt} + a y(t) = b x(t)$ becomes
+
+$$ \frac{v[n] - v[n-1]}{\Delta n} + \frac{\rho v[n]}{m} = \frac{f[n]}{m}$$
+---
+**For CT-> Differential equation, For DT-> Difference equation**
+
+> [!INFO] Imp
+> If we come up with methods to solve one class of system, we can do same thing for other systems in same class.
+
+---
 #### Classification of systems
 Interconnection of subsystems, devices, to transform input into output
 - CT and DT systems
@@ -203,4 +202,6 @@ Interconnection of subsystems, devices, to transform input into output
 		- Eg. y(t) = t x(t)
 	- Non-linear
 		- Eg. y(t) = m x(t) + c
+
+**We're worried only about LTI systems in this course.**
 
