@@ -30,6 +30,7 @@ Week 1 outline!
 ![300](../Images/Pasted%20image%2020220502082603.png)
 
 **What is a system on a chip?**
+
 Microprocesser | Microcontroller
 --- | ---
 It's used in computer systems like desktops, etc. | It's used in embedded systems like washing machine, etc.
@@ -51,12 +52,12 @@ Sequential logic: uses clock cycles and does stuff, and synchronizes stuff!
 **Any base to decimal conversion-> just multiply it out**
 
 $7392 = 7 \times 10^{3}+ 3 \times 10^{2}+ 9 \times 10^{1}+ 2 \times 10^0$
-
 $$a_{n}a_{n-1} ... a_{0}. a_{-1} ... a_{-m} = \sum_{i = -m}^{n} a_{i} \text{base}^i$$
 
 **Decimal to binary**:
 
 Eg. 41
+
 41 | Dividing by 2
 -- | --
 20 | 1
@@ -95,10 +96,34 @@ The number is written top-down.
 **Summary**
 ![](../Images/Pasted%20image%2020220505161013.png)
 
+## 5th May
 #### Complements
 Two n-digit numbers in base 'r'
 
-M - N
+Nice video: https://www.youtube.com/watch?v=4qH4unVtJkE
+**Negative numbers:**
+- Sign-magnitude
+	- First bit for sign, remaining digits as usual binary
+	- There's a problem: 5 + -5 in this representation is NOT zero.
+- Ones' complement
+	- Positive numbers as usual, negative numbers are just 1s complement (which is toggling every bit)
+	- 5   -> 0101
+	- -3 -> 1100
+	- 5 - 3 -> 10001 -> 0001 -> 1
+	- 3  -> 1010
+	- -5 -> 0011
+	- So, it is offset by one
+- 2s complement
+	- Take twos complement of every number to get its negative
+	- you get one extra number
+	- there are *no* signed zeroes
+	- The numbers are the same as unsigned numbers mod (2^N)
+	- First digit represent -2^N digit really
+	- Number + its negative is 0
+
+**Addition of numbers:** lite
+
+**Subtraction of numbers:** M - N
 - M + (r^n - N)
 - if M >= N:
 	- Produces end carry, and leftmost carry digit corresponds to r^n, which needs to be discarded
@@ -110,26 +135,10 @@ Eg. 6 - 13
 
 - +6 -> 00000110
 - -13 -> 
-	-                                          (+13) -> 00001101
+	- Binary representation:     (+13) -> 00001101
 	- Toggle: 1s complement:  (-13) -> 11110010
 	- Add 1 to ones complement -> Twos complement -> 11110011
 - Adding them both: 11111001
 - end carry not there, so now do twos complement: 00000111
 - This is **-7**!
 
-Eg.
-X -> 1010100
-Y ->1000011
-
-X - Y:
-X   -> 1010100
--Y  -> 0111101
-      (1)0010001
-Now truncate end carry
-
-Final answer is 0010001 or 17!
-
-**Negative numbers:**
-- Signed magnitude: First bit for sign, remaining digits as usual binary
-- Signed 1s: Positive numbers as usual, negative numbers are just 1s complement
-- Signed 2s complement: Take twos complement of every number, you get one extra number (the complement of 0, i.e.)
