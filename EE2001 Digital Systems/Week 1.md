@@ -3,7 +3,6 @@
 ## 2nd May
 
 Week 1 outline!
-
 ![600](../Images/Pasted%20image%2020220502083915.png)
 
 **What are the advantages of digital systems?**
@@ -48,9 +47,6 @@ Sequential logic: uses clock cycles and does stuff, and synchronizes stuff!
 
 ---
 ## 3rd May
-Signals:
-1. Analog
-2. Digital signal -> discrete time signal
 
 **Any base to decimal conversion-> just multiply it out**
 
@@ -76,7 +72,7 @@ Answer is *100101*.
 **Decimal to Octal**
 Eg. 153
 
-153 | 8
+153 | Dividing by 8
 -- | --
 19|1
 2|3
@@ -95,3 +91,45 @@ The number is written top-down.
 **Binary, Hex, Octal conversion is lite, use 2, 4, and 3 digits respectively**
 
 8 bits makes up one byte (little children know this)
+
+**Summary**
+![](../Images/Pasted%20image%2020220505161013.png)
+
+#### Complements
+Two n-digit numbers in base 'r'
+
+M - N
+- M + (r^n - N)
+- if M >= N:
+	- Produces end carry, and leftmost carry digit corresponds to r^n, which needs to be discarded
+	- M - N
+- if M < N:
+	- Doesn't produce n carry, and result is r^n - (M - N) -> We have to take r's complement and place negative sign at front
+
+Eg. 6 - 13
+
+- +6 -> 00000110
+- -13 -> 
+	-                                          (+13) -> 00001101
+	- Toggle: 1s complement:  (-13) -> 11110010
+	- Add 1 to ones complement -> Twos complement -> 11110011
+- Adding them both: 11111001
+- end carry not there, so now do twos complement: 00000111
+- This is **-7**!
+
+Eg.
+X -> 1010100
+Y ->1000011
+
+X - Y:
+X   -> 1010100
+-Y  -> 0111101
+      (1)0010001
+Now truncate end carry
+
+Final answer is 0010001 or 17!
+
+**Negative numbers:**
+- Signed magnitude: First bit for sign, remaining digits as usual binary
+- Signed 1s: Positive numbers as usual, negative numbers are just 1s complement
+- Signed 2s complement: Take twos complement of every number, you get one extra number (the complement of 0, i.e.)
