@@ -391,11 +391,15 @@ wx \ yz | 00 | 01 | 11 | 10
 **11** | 1 | 1 | 0 | 1
 **10** | 1 | 1 | 0 | 0
 
-f1 = y + w'z' + x z' = y + z' (x + w')
+f1 = y' + w'z' + x z' = y' + z' (x + w')
 
-Prime Implicant: Product term obtained by combining maximum number of adjacent cells
-Essential Prime Implicant: Only prime implicant covers the minterm
-Redundant Term: Refer book
+f1' = yz + w x' y
+f1 = (y' + z') (w' + x +y') = w'y' + w'z' + x y' + x z' + y'z' + y'
+                                         = y' + z' (x + w')
+
+Prime Implicant: Total number of adjacencies in the K-map (including redundancies)
+Essential Prime Implicant: Prime implicants that cover a minterm no other implicant covers
+Redundant Implicant: Implicant for which each minterm is covered by some other implicant
 
 AB \ CD | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
@@ -413,6 +417,8 @@ Eg.
 
 
 **F**
+
+1.
 AB \ CD | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **00** | 1 | 1 | 0 | 1
@@ -420,8 +426,11 @@ AB \ CD | 00 | 01 | 11 | 10
 **11** | 0 | 0 | 0 | 0
 **10** | 1 | 1 | 0 | 1
 
-1. 
-F = B'D' + B' C' + A' C' D
-F' = CD + AB + BD'
-F = (C' + D') (A' + B') (B' + D)
 2. Essential implicants: 
+- B'D' (for 0010 and 1010)
+- B'C'
+- A'C D
+
+3. All minterms are covered!
+4. F = B'D' + B'C' + A' C' D
+
