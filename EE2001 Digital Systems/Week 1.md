@@ -110,9 +110,7 @@ Nice video: https://www.youtube.com/watch?v=4qH4unVtJkE
 	- 5   -> 0101
 	- -3 -> 1100
 	- 5 - 3 -> 10001 -> 0001 -> 1
-	- 3  -> 1010
-	- -5 -> 0011
-	- So, it is offset by one
+	- So, it is offset by one and we have to do some juggling around while carrying out subtraction
 - 2s complement
 	- Take twos complement of every number to get its negative
 	- you get one extra number
@@ -284,3 +282,146 @@ This is intuitive enough!
 - $f' = \sum_{\text{i runs over everything else}} m_i$
 - $f'' = f = \prod_{\text{i runs over everything else}} m_{i}' = \prod_{\text{i runs over everything else}} M_{i}$
 
+Dual of a function:
+- Replacing all AND by OR and vice versa
+- Replacing all 1s by 0s
+
+Taking complement of a function is the same as taking dual of the function and replacing each literal by it's complement (this follows from de Morgan's theorem).
+
+To go from positive logic to negative logic, we just have to take the dual!
+
+## May 9
+
+#### Gate level minimization: K-maps
+- The objective is find the optimal gate level implementation of the Boolean function
+	- Complexity of digital logic circuit is related to the complexity of the algebraic expression
+	- Truth tables are unique
+	- Pictorial representation is Karnaugh map
+- Consider f(x,y,z)
+![](../Images/Pasted%20image%2020220509082627.png)
+
+Only one bit changes between adjacent cells (in both axes)
+
+Adjacencies | Literals
+-- | --
+1 | 3
+2 | 2
+4 | 1
+8 | 0
+
+**f2 = Sum(3,5,6,7)**
+x \ yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0** | 0 | 0 | 1 | 0
+**1** | 0 | 1 | 1 | 1
+
+Adjacent cells in K-map represent whatever didn't change!
+
+f2 doesn't change once in x direction, once in y direction, once in z direction
+So, $f2 = xy + yz + zx$
+
+**f1 = Sum(1,4,7)**
+x \ yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0** | 0 | 1 | 0 | 0
+**1** | 1 | 0 | 1 | 0
+No adjacency, so it's simplified already
+
+**f3** = sum(3,4,6,7)
+x \ yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0** | 0 | 0 | *1*| 0
+**1** | *1* | 0 | *1* | *1*
+f3 = yz + xy + xz' = yz + xz'
+
+- Reason: xy terms is redundant!
+
+So the aim is to cover all minterms.
+
+**f4** = sum (0,2,3,4,5)
+x \ yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0** | 1 | 0 | 0 | 1
+**0** | 1 | 1 | 0 | 1
+- Four cell adjacency!
+
+f4 = z' + x y'
+
+**f5** = Sum(1,2,5,6,7) = Prod(0, 3, 4)
+x \ yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0** | 0 | 1 | 0 | 1
+**1** | 0 | 1 | 1 | 1
+f5 = y'z + yz'+ xy 
+
+f5 = (y + z) . (x + y' + z')
+
+
+**f6** = A'C + A'B + A B' C + B C
+
+A \ BC | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0** | 0 | 1 | 1 | 1
+**1** | 0 | 1 | 1 | 0
+
+f6 = C + A'B
+
+**Four variable K-maps**
+wx \ yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**00** | 0 | 0 | 0 | 0
+**01** | 0 | 0 | 0 | 0
+**11** | 0 | 0 | 0 | 0
+**10** | 0 | 0 | 0 | 0
+
+Adjacencies | Literals
+-- | --
+1 | 4
+2 | 3
+4 | 2
+8 | 1
+16 | 0
+
+**f1** = Sum(0,1,2,4,5,6,8,9,12,13,14)
+
+wx \ yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**00** | 1 | 1 | 0 | 1
+**01** | 1 | 1 | 0 | 1
+**11** | 1 | 1 | 0 | 1
+**10** | 1 | 1 | 0 | 0
+
+f1 = y + w'z' + x z' = y + z' (x + w')
+
+Prime Implicant: Product term obtained by combining maximum number of adjacent cells
+Essential Prime Implicant: Only prime implicant covers the minterm
+Redundant Term: Refer book
+
+AB \ CD | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**00** | 1 | 0 | 1 | 1
+**01** | 0 | 1 | 1 | 0
+**11** | 0 | 1 | 1 | 0
+**10** | 1 | 1 | 1 | 1
+
+Eg.
+- m5 is covered only by one prime implicant, BD is essential prime implicant
+- m0 is covered only by B' D'
+
+**Simplification of Kmap**
+![](../Images/Pasted%20image%2020220509094525.png)
+
+
+**F**
+AB \ CD | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**00** | 1 | 1 | 0 | 1
+**01** | 0 | 1 | 0 | 0
+**11** | 0 | 0 | 0 | 0
+**10** | 1 | 1 | 0 | 1
+
+1. 
+F = B'D' + B' C' + A' C' D
+F' = CD + AB + BD'
+F = (C' + D') (A' + B') (B' + D)
+2. Essential implicants: 
