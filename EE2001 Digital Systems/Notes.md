@@ -98,7 +98,7 @@ The number is written top-down.
 
 ## 5th May
 #### Complements
-Two n-digit numbers in base 'r' (prof went in a different order, this order is easier)
+Given two n-digit numbers in base 'r'
 
 Nice video: https://www.youtube.com/watch?v=4qH4unVtJkE
 **Negative numbers:**
