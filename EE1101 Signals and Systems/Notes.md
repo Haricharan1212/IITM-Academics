@@ -205,3 +205,24 @@ Interconnection of subsystems, devices, to transform input into output
 
 **We're worried only about LTI systems in this course.**
 
+## 11th May
+
+Convolution of two functions:
+$x[n] * y[n] = \sum_{k = -\infty} ^{\infty} x[k] y[n - k]$
+
+Imagine a DT system that is linear
+
+**Sifting property**
+$$\sum_{- \infty} ^{\infty} x[k] \delta[n - k] = x[n]$$
+Consider LTI system
+- x[k] -> S -> y[k]
+- $\delta [n - k]$ -> S -> $h_{k}[n] = h[n - k]$
+- $x[n] = \sum_{-\infty}^{\infty} x[k] \delta[k] \rightarrow \sum_{-\infty}^{\infty} x[k] h[n - k] = y[n]$
+This is called the superposition sum or convolution sum -> $y[n] = \sum_{-\infty}^{\infty} x[n] h[n - k]$
+
+$y[n] = x[n] * h[n]$
+
+
+
+
+$$\int_{-\infty} ^{\infty} f(\tau) \delta (\tau - t) d \tau = f(t)$$
