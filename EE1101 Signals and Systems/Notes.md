@@ -219,10 +219,54 @@ Consider LTI system
 - $\delta [n - k]$ -> S -> $h_{k}[n] = h[n - k]$
 - $x[n] = \sum_{-\infty}^{\infty} x[k] \delta[k] \rightarrow \sum_{-\infty}^{\infty} x[k] h[n - k] = y[n]$
 This is called the superposition sum or convolution sum -> $y[n] = \sum_{-\infty}^{\infty} x[n] h[n - k]$
+where $h[n]$ is the unit impulse response.
 
 $y[n] = x[n] * h[n]$
 
+**CT LTI system**
 
+> [!note] Wow!
+> The response of the system is determined by unit impulse response
+> - We can give an unit impulse, see what it does, then convolute it with x[n] to figure out y[n]!
 
+WORK OUT LATER PROPERLY!
 
-$$\int_{-\infty} ^{\infty} f(\tau) \delta (\tau - t) d \tau = f(t)$$
+$\delta_{\Delta} (t - k_{0}) \rightarrow h_{k \Delta} (t)$
+$x(t) = \sum_{-\infty} ^{\infty} x(k \Delta) \delta_{\Delta} (t - k_{0})\Delta$
+$$\int_{-\infty} ^{\infty} x(\tau) \delta (t - \tau) d \tau = x(t)$$
+
+Using Linearity: 
+$\sum_{\infty} ^{\infty} x(k \Delta) \delta_{\Delta} (t - k) \rightarrow \sum_{\infty} ^{\infty} x(k \Delta) h_{k \Delta} (t)$
+
+Using time invariance:
+$$y(t) = \int_{-\infty} ^{\infty} x(\tau) h(t - \tau) d \tau = x(\tau) * h(t)$$
+
+**Properties:**
+- **Commutative property**
+**x[n] * h[n] = h[n] * x[n]**
+
+$y[n] = \sum_{-\infty} ^{\infty} x[k] x[n - k] = \sum_{-\infty} ^{\infty} x[n - k] x[k]$
+(Property of reversing summation)
+
+**- Distributive property
+$x[n] * (h_1[n] + h_2[n]) = x[n] * h_1[n] + x[n] * h_2[n]$**
+Proof: $y[n] = \sum_{- \infty} ^{\infty} x[k] (h_{1} [n - k] + h_{2}[n- k]) = = \sum_{- \infty} ^{\infty} x[k] h_{1}[n - k] + \sum_{-\infty}^{\infty} x[k] h_{2}[n - k] = y_1[n] + y_2[n]$
+
+**- Associative property**
+$(x[n] * h1[n]) * h2[n] = x[n] * (h1[n] * h2[n])$
+
+x(t) -> S1 -> y1(t) -> S2 -> y2(t)
+$\delta[n] \rightarrow h_1[n]$, $\delta[n] \rightarrow h_2[n]$
+
+Using commutativity, 
+$(x[n] * h_1[n]) * h_2[n] = (x[n] * h_2[n]) * h_1[n]$
+If we're passing a signal x(t) through many LTI systems, order doesn't matter.
+
+**- For memoryless systems**
+$h[n] = A \delta [n]$
+$y[n] = \sum_{- \infty} ^{\infty} x[k] A \delta [n - k] = A x[n]$
+If A = 1, system becomes identity system
+
+**- Invertibility**
+$x[n] * (h_1[n] * h_{2}[n])= x[n] = x[n] * \delta[n]$
+$\implies h_{1}[n] * h_{2}[n] = \delta[n]$
