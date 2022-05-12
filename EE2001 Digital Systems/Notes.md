@@ -1,3 +1,4 @@
+>Haricharan
 # Digital Systems
 
 ## 2nd May
@@ -434,3 +435,29 @@ AB \ CD | 00 | 01 | 11 | 10
 3. All minterms are covered!
 4. F = B'D' + B'C' + A' C' D
 
+## May 12
+#### Don't care conditions:
+Eg. Binary coded decimal (BCD)
+Representation of decimals in binary numbers
+396 -> Each value is represented by corresponding value
+396 -> 0011 1001 0110
+
+BCD doesn't care about remaining inputs like 1111 (corresponding to 15). So, *we don't care* about that part.
+Don't cares are represented by X in K-map
+
+F = $\Sigma (1, 3, 7, 11, 15)$
+d = $\Sigma (0, 2, 5)$
+
+wx \ yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**00** | X | 1 | 1 | X
+**01** | 0 | X | 1 | 0
+**11** | 0 | 0 | 1 | 0
+**10** | 0 | 0 | 1 | 0
+
+SOP
+F = yz + w'x' or yz + w'z
+POS
+F = z (w' + y)
+
+#### NAND NOR implementation is easier to realize
