@@ -460,4 +460,98 @@ F = yz + w'x' or yz + w'z
 POS
 F = z (w' + y)
 
-#### NAND NOR implementation is easier to realize
+## May 13
+> **NAND and NOR gates are easier to realize**
+
+AND, NOT, OR gates -> NAND and NOR gates
+NAND and NOR gate -> universal gate -> we can create any other gates using these gates
+
+- NOT gate -> NAND(x, x)
+- AND gate -> NOT(NAND(x, x))
+- OR gate -> NAND(NOT(x), NOT(y))
+
+**Boolean function implementation**
+1. Represent function in K-map
+2. Obtain simplified function in terms of Boolean operators
+3. Convert function to NAND/NOR logic
+4. Implement using NAND/NOR gates
+
+Eg. 
+F = AB + CD
+NAND logic
+- (A' + B')' + (C' + D')' = NOR(NOR(NOR(NOR(A),  NOR (B)), NOR(NOR(C), NOR(D))))
+
+Eg. F = $\Sigma (1,2,3,4,5,7)$
+
+1.
+A \ BC | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0** | 0 | 1 | 1 | 1
+**1** | 1 | 1 | 1 | 0
+F = A B' + A' B + C
+2. Done
+3. 
+NAND((NAND(A, NAND(B)), (NAND(NAND(A), B)), NAND(C))
+NOR(NOR(C, NOR(NOR(A), B), NOR(A, NOR(B))))
+
+Eg. F = ((A + B)(C + D)E)'
+NOR(NOR(NOR(A, B)), NOR(C, D), NOR(E)))
+
+In general, look at complement:
+- AND-NOR <-> NAND-AND -> SOP form combining 1s
+- OR-NAND <-> NOR-OR -> POS form combining 0s
+
+x \ yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0** | 1 | 0 | 0 | 0
+**1** | 0 | 0 | 0 | 1
+**SOP form**
+From zeroes, we get F'
+F' = z + xy' + x'y
+F = (z + xy' + x'y)' -> AND-NOR realization
+F = ((x'y)' (x'y)' z') -> NAND-AND realization
+
+**POS form**
+F' = (x + y + z)(x' + y + z')
+F = ((x + y + z) (x' + y + z'))' -> OR-NAND realization
+F = (x + y + z)' + (x' + y + z')' -> NOR-OR realization
+
+#### XOR gate
+- Parity checking
+- Binary adders
+- Error detection and correction
+
+$x \oplus y = xy' + x'y = (x +  y')(x' + y)$
+
+**Identities:**
+- $x \oplus 0 = x$
+- $x \oplus 1 = x'$
+- $x \oplus x = 0$
+- $x \oplus x' = 1$
+- $x \oplus y' = x' \oplus y = (x \oplus y)'$
+-  Using NAND gate: NAND(NAND(x, y'), NAND(x', y))
+
+Eg. $A \oplus B$
+AB \ CD | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**00** | 0 | 0 | 0 | 0
+**01** | 1 | 1 | 1 | 1
+**11** | 1 | 1 | 1 | 1
+**10** | 0 | 0 | 0 | 0
+
+$A \oplus B \oplus C$
+AB \ CD | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**00** | 0 | 0 | 1 | 1
+**01** | 1 | 1 | 0 | 0
+**11** | 0 | 0 | 1 | 1
+**10** | 1 | 1 | 0 | 0
+
+$A \oplus B \oplus C \oplus D$
+AB \ CD | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**00** | 0 | 1 | 0 | 1
+**01** | 1 | 0 | 1 | 0
+**11** | 0 | 1 | 0 | 1
+**10** | 1 | 0 | 1 | 0
+
