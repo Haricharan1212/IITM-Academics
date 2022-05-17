@@ -470,11 +470,11 @@ NAND and NOR gate -> universal gate -> we can create any other gates using these
 - AND gate -> NOT(NAND(x, x))
 - OR gate -> NAND(NOT(x), NOT(y))
 
-**Boolean function implementation**
-1. Represent function in K-map
-2. Obtain simplified function in terms of Boolean operators
-3. Convert function to NAND/NOR logic
-4. Implement using NAND/NOR gates
+> [!INFO] Boolean function implementation
+> 1. Represent function in K-map
+> 2. Obtain simplified function in terms of Boolean operators
+> 3. Convert function to NAND/NOR logic
+> 4. Implement using NAND/NOR gates
 
 Eg. 
 F = AB + CD
@@ -554,4 +554,129 @@ AB \ CD | 00 | 01 | 11 | 10
 **01** | 1 | 0 | 1 | 0
 **11** | 0 | 1 | 0 | 1
 **10** | 1 | 0 | 1 | 0
+
+
+
+## 17th May
+### Combinatorial Logic Circuits
+Interconnection of logic gates to accomplish a logic operation
+- Binary addition
+- Binary subtraction
+- Binary multiplication
+- Comparison between binary numbers
+- Encoding, decoding, etc.
+
+**Design Procedure**
+1. Determine number of inputs and outputs
+2. Derive truth table
+3. Obtain simplified Boolean expressions
+4. Implement logic circuit
+
+#### Half-adder
+Carries out binary addition of two binary inputs
+
+x | y | | c | s
+-- | -- |--| -- | --
+0 | 0 || 0 | 0
+0 | 1 || 0 | 1
+1 | 0 || 0 | 1
+1 | 1 || 1 | 0
+
+$s = x \oplus y$
+$c  = x y$
+
+#### Full Adder
+
+x | y | z| | c | s
+-- | -- |--|--| -- | --
+0 | 0 |0|| 0 | 0
+0 | 0 |1|| 0 | 1
+0 | 1 |0|| 0 | 1
+0 | 1 |1|| 1 | 0
+1 | 0 |0|| 0 | 1
+1 | 0 |1|| 1 | 0
+1 | 1 |0|| 1 | 0
+1 | 1 |1|| 1 | 1
+
+K-map
+x/yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0**|0|1|0|1 
+**1**|1|0|1|0
+
+$s = xy'z' + x' y z' + x'y'z + xyz= z' (x \oplus y) + z((x \oplus y)') = (x \oplus y) \oplus z$
+
+x/yz | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+**0**|0|0|1|0 
+**1**|0|1|1|1
+
+$c = xy + x'yz + xy'z = xy + z (x \oplus y)$
+
+> We can just use the XOR used in s for c
+
+**Full Adder-> 2 Half Adder + OR gate**
+
+#### 4-bit adder
+**Ripple Carry adder**
+Augend + Addend
+
+Output carry of ones place becomes input to next digit
+Output carry of twos place becomes input to fours digit, etc.
+
+![600](../Images/Pasted%20image%2020220517084200.png)
+
+> [!failure] Problems with this method
+> We have to do this sequentially, one by one, so it takes time. We have to wait for the carry
+
+**Carry look ahead logic**
+$C_{i + 1} = A_{i}B_{i} + C_i (A_i \oplus B_i)$
+Carry Generate -> $G_{i}= A_i B_i$
+Carry Propagate -> $P_{i} = (A_{i} \oplus B_i)$
+
+$C_0$ -> Input carry
+$C_1$ -> $G_{0}+ P_{0} C_0$
+$C_2$ -> $G1 + P1 G_{0} + P_{1} P_{0} C_0$
+$C_3$ -> $G_{2}+ P_{2} G_{1} + P_{2}P_{1}G_{0}+ P_{2}P_{1}P_{0}C_0$
+
+#### Binary Subtraction
++49 ->00110001
+-49  ->1s: 11001110 -> Accomplished by XOR gate
+           2s: 11001111 -> Can be done using initial carry $C_0$
+
+Extra sign bit **M** -> M = 0, add; M = 1, subtract
+
+![](../Images/Pasted%20image%2020220517132541.png)
+
+70 -> 01000110
+80 -> 01010000
+**10010110**
+=150
+
+2s complement of this:
+**01101010**
+So, we actually get -106
+
+-70 -> 10111010
+-80 -> 10110000
+**01101010   (C8 = 1) -> 106**
+
+If $\text{Overflow Bit} = V = C_{4} \oplus C_{3}$ = 0 -> Correct
+Else -> Wrong
+
+Eg.
+M ->0
+A -> 1000
+B -> 1001
+        **(1)0001**
+Carry bits are 0 and 1
+A + B -> 0001, overflow is there
+
+Eg. 1100, 1000
+
+1100
+0111
+0001
+**(1)0100**
+Carry bits are 1, 1, so there is NO overflow
 

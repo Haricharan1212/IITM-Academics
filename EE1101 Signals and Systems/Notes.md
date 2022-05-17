@@ -271,3 +271,15 @@ If A = 1, system becomes identity system
 **- Invertibility**
 $x[n] * (h_1[n] * h_{2}[n])= x[n] = x[n] * \delta[n]$
 $\implies h_{1}[n] * h_{2}[n] = \delta[n]$
+
+**-Causality**
+$h[n] < 0 for n < 0$
+
+**-Stability**
+$\int_{-\infty}^{\infty} |h(t)| dt < \infty$
+
+#### Unit Step Response:
+u(t) -> System -> h(t)
+
+s(t) = u(t) * h(t)
+       = h(t) * u(t)
