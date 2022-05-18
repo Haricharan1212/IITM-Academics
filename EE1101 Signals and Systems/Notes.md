@@ -242,6 +242,8 @@ $\sum_{\infty} ^{\infty} x(k \Delta) \delta_{\Delta} (t - k) \rightarrow \sum_{\
 Using time invariance:
 $$y(t) = \int_{-\infty} ^{\infty} x(\tau) h(t - \tau) d \tau = x(\tau) * h(t)$$
 
+## 17th May
+
 **Properties:**
 - **Commutative property**
 **x[n] * h[n] = h[n] * x[n]**
@@ -278,8 +280,20 @@ $h[n] < 0 for n < 0$
 **-Stability**
 $\int_{-\infty}^{\infty} |h(t)| dt < \infty$
 
+## 18th May
+
 #### Unit Step Response:
-u(t) -> System -> h(t)
+u(t) -> System -> s(t)
 
 s(t) = u(t) * h(t)
        = h(t) * u(t)
+
+s[n] = h[n] * u[n]
+       = $\sum_{- \infty} ^{\infty} h[k] u[n - k]$
+       = $\sum_{- \infty} ^{n} h[k]$
+
+h[n] = s[n] - s[n - 1]
+
+$s(t) = \int_{-\infty} ^{\infty} u(t - \tau) h(\tau) d \tau = \int_{- \infty} ^{t} h(\tau) d \tau$
+$h = \frac{d s(t)}{d t}$
+
