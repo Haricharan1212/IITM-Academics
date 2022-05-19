@@ -297,3 +297,31 @@ h[n] = s[n] - s[n - 1]
 $s(t) = \int_{-\infty} ^{\infty} u(t - \tau) h(\tau) d \tau = \int_{- \infty} ^{t} h(\tau) d \tau$
 $h = \frac{d s(t)}{d t}$
 
+## 19th May
+
+> [!important] FOURIER LESGOO
+> Lesgoo
+
+**CT system**
+$x(t) = e^{s t}$
+$y(t) = \int_{- \infty} ^{\infty} h(\tau) e^{s(t - \tau)} d \tau = e^{-st} \int_{- \infty} ^{\infty} h(\tau) e^{- s \tau} d \tau = e^{st} H(s)$
+
+$e^{st}$ -> Eigenfunction of system
+H(s) -> Eigenvalue of the system
+
+**DT system**
+$x[n] = z^n$
+$y[n] = \sum_{- \infty} ^{\infty} h[k] z^{n}z^{-k} = z^{n} \sum_{-\infty} ^{\infty} h[k] z^{-k}$
+$z^n$ is the Eigenfunction of system
+$H(z)$ is Eigenvalue of system
+
+If I can decompose x(t):
+$x(t) = sum_{-\infty} ^{\infty} a_{k}e^{s_{k} t} \rightarrow sum_{- \infty} ^{\infty} a_{k}H(s_{k}) e^{sk}$
+
+If x(t) is periodic, $x(t) = e^{j w_o}$
+$\phi_{k}= e^{j k w_{o}t}$
+Any arbitrary periodic $x(t) = \sum_{-\infty} ^{\infty}  a_{k}e^{j  w_{o} t}$
+
+$a_{-k} = a_{k}^*$
+$a_{k}= a_{-k} ^ {*}$
+

@@ -680,3 +680,17 @@ Eg. 1100, 1000
 **(1)0100**
 Carry bits are 1, 1, so there is NO overflow
 
+#### Binary Multiplication
+Multiplicand -> B1 B0
+Multiplier -> A1 A0
+
+B1 B0
+A1 A0
+
+P0 = A0B0
+P1 =  A0B1 + A1B0
+P2 = Carry + A1B1
+P3
+
+2x2 multiplication ->4 AND gates and 2 HA
+
