@@ -228,9 +228,7 @@ $y[n] = x[n] * h[n]$
 
 > [!note] Wow!
 > The response of the system is determined by unit impulse response
-> - We can give an unit impulse, see what it does, then convolute it with x[n] to figure out y[n]!
-
-WORK OUT LATER PROPERLY!
+> - We can give an unit impulse, see what it does, then convolve x[n] to figure out y[n]!
 
 $\delta_{\Delta} (t - k_{0}) \rightarrow h_{k \Delta} (t)$
 $x(t) = \sum_{-\infty} ^{\infty} x(k \Delta) \delta_{\Delta} (t - k_{0})\Delta$
@@ -254,7 +252,6 @@ $y[n] = \sum_{-\infty} ^{\infty} x[k] x[n - k] = \sum_{-\infty} ^{\infty} x[n - 
 -** Distributive property
 $x[n] * (h_1[n] + h_2[n]) = x[n] * h_1[n] + x[n] * h_2[n]$**
 Proof: $y[n] = \sum_{- \infty} ^{\infty} x[k] (h_{1} [n - k] + h_{2}[n- k]) = = \sum_{- \infty} ^{\infty} x[k] h_{1}[n - k] + \sum_{-\infty}^{\infty} x[k] h_{2}[n - k] = y_1[n] + y_2[n]$
-
 -**Associative property**
 $(x[n] * h1[n]) * h2[n] = x[n] * (h1[n] * h2[n])$
 
@@ -268,17 +265,20 @@ If we're passing a signal x(t) through many LTI systems, order doesn't matter.
 -**For memoryless systems**
 $h[n] = A \delta [n]$
 $y[n] = \sum_{- \infty} ^{\infty} x[k] A \delta [n - k] = A x[n]$
-If A = 1, system becomes identity system
 
 -**Invertibility**
 $x[n] * (h_1[n] * h_{2}[n])= x[n] = x[n] * \delta[n]$
 $\implies h_{1}[n] * h_{2}[n] = \delta[n]$
 
 -**Causality**
-$h[n] < 0 for n < 0$
+$h[n] < 0 \hspace{5 px} \text{for} \hspace{5 px}n < 0$
+Reason-> Unit impulse function is 0 for n < 0, so as it is causal, unit impulse response is also 0 for n < 0
 
 -**Stability**
-$\int_{-\infty}^{\infty} |h(t)| dt < \infty$
+Consider giving a Bounded input x[n] < B.
+$y[n] = \sum_{- \infty} ^{\infty} x[k] h[n - k] < B \sum_{\infty} ^{\infty} |h[k]|$
+
+$\sum\limits_{-\infty}^{\infty} |h[k| < \infty$
 
 ## 18th May
 
