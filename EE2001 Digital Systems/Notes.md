@@ -694,3 +694,85 @@ P3
 
 2x2 multiplication ->4 AND gates and 2 HA
 
+## May 20
+
+#### Magnitude Comparator
+A = A3A2A1A0
+B = B3B2B1B0
+$A_{i} \odot B_{i}= x_i$, where $\odot$ is XNOR gate
+- A = B if $A_{i}= B_{i}\forall i$
+	- A = B if $\Pi A_{i} \odot B_{i} = \Pi x_i$
+- A > B -> $A_{3}B_{3}' + x_{3}A_{2}B_{2}'+ x_{3} x_{2} A_{1} B_{1}'+ x_{3}x_{2}x_{1}A_{0}B_{0}'$ 
+- A < B -> $A_{3}'B_{3} + x_{3}A_{2}'B_{2}+ x_{3} x_{2} A_{1}' B_{1}+ x_{3}x_{2}x_{1}A_{0}'B_{0}$ 
+
+#### Decoder
+**2 x 4 Decoder with Enable Pin**
+Enable 1 -> Chip not ready
+Enable 0 -> Chip ready to work
+
+Enable | A |  B | D0 | D1 | D2 | D3
+-- | -- | -- | -- | -- | -- | --
+1 | X | X | 1 | 1 | 1 | 1 
+0 | 0 | 0 | 0 | 1 | 1 | 1
+0 | 0 | 1 | 1 | 0 | 1 | 1
+0 | 1 | 0 | 1 | 1 | 0 | 1
+0 | 1 | 1 | 1 | 1 | 1 | 0
+
+Also acts as demultiplexer
+- if you want your data to go to say D3, we can give A = 1, B = 1
+- after two seconds say we want data to go to D1, we can give A = 0, B = 1
+
+> [!INFO] 
+> It's possible to use the enable pin as in input, in that case we get $2^{(n + 1)}$ outputs
+
+#### Encoders
+
+$2^{n}$ bits to n bits
+
+**V**
+- 0 if all 0s
+- 1 otherwise
+
+Least Priority -> D0 | D1 | D2 | Highest Priority -> D3 | x | y | v
+-- | -- | -- | -- | -- | -- | --
+0 | 0 | 0 | 0 | X | X | 0
+1 | 0 | 0 | 0 | 0 | 0 | 1
+X | 1 | 0 | 0 | 0 | 1 | 1
+X | X | 1 | 0 | 1 | 0 | 1
+X | X | X | 1 | 1 | 1 | 1
+
+- V = D0 + D1 + D2 + D3
+- x = D2 + D3
+- y = D3 + D2' D1
+
+#### Multiplexer
+
+S -> Select pin
+x -> Input
+y -> Output
+
+S1 | S0  | y
+-- | -- | -- 
+0 | 0 | x0 
+0 | 1 | x1 
+1 | 0 | x2
+1 | 1 | x3
+
+#### Boolean Function implementation
+###### Using Multiplexer
+Implement f(x,y,z) = sum(1,2,6,7) using 4x1 mux
+
+![400](../Images/Pasted%20image%2020220520113440.png)
+
+F(A, B, C, D) = sum(1, 3, 4, 11, 12, 13, 14, 15)
+![400](../Images/Pasted%20image%2020220520114148.png)
+
+General:
+n variables
+- n - 1 select pins
+- 2^(n - 1) inputs
+
+###### Using Decoder
+# Think this through later
+f(A, B, C) = A'BC + A B C' + ABC
+![400](../Images/Pasted%20image%2020220520114801.png)
