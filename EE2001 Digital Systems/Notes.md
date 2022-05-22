@@ -555,8 +555,7 @@ AB \ CD | 00 | 01 | 11 | 10
 **11** | 0 | 1 | 0 | 1
 **10** | 1 | 0 | 1 | 0
 
-
-
+---
 ## 17th May
 ### Combinatorial Logic Circuits
 Interconnection of logic gates to accomplish a logic operation
@@ -572,6 +571,7 @@ Interconnection of logic gates to accomplish a logic operation
 3. Obtain simplified Boolean expressions
 4. Implement logic circuit
 
+#### One-bit adders
 #### Half-adder
 Carries out binary addition of two binary inputs
 
@@ -598,7 +598,7 @@ x | y | z| | c | s
 1 | 1 |0|| 1 | 0
 1 | 1 |1|| 1 | 1
 
-K-map
+- **K-map for s**
 x/yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0**|0|1|0|1 
@@ -606,6 +606,7 @@ x/yz | 00 | 01 | 11 | 10
 
 $s = xy'z' + x' y z' + x'y'z + xyz= z' (x \oplus y) + z((x \oplus y)') = (x \oplus y) \oplus z$
 
+- **K-map for c**
 x/yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0**|0|0|1|0 
@@ -615,10 +616,15 @@ $c = xy + x'yz + xy'z = xy + z (x \oplus y)$
 
 > We can just use the XOR used in s for c
 
+![600](../Images/Pasted%20image%2020220522102851.png)
+![600](../Images/Pasted%20image%2020220522103351.png)
+
 **Full Adder-> 2 Half Adder + OR gate**
 
+#### Many bit adders
 #### 4-bit adder
 **Ripple Carry adder**
+Nice video https://www.youtube.com/watch?v=wvJc9CZcvBc&ab_channel=BenEater
 Augend + Addend
 
 Output carry of ones place becomes input to next digit
@@ -631,8 +637,12 @@ Output carry of twos place becomes input to fours digit, etc.
 
 **Carry look ahead logic**
 $C_{i + 1} = A_{i}B_{i} + C_i (A_i \oplus B_i)$
+
 Carry Generate -> $G_{i}= A_i B_i$
 Carry Propagate -> $P_{i} = (A_{i} \oplus B_i)$
+
+$S_{i} = P_{i} \oplus C_{i}$
+$C_{i + 1} = G_{i} + C_{i} P_{i}$
 
 $C_0$ -> Input carry
 $C_1$ -> $G_{0}+ P_{0} C_0$
@@ -647,38 +657,49 @@ $C_3$ -> $G_{2}+ P_{2} G_{1} + P_{2}P_{1}G_{0}+ P_{2}P_{1}P_{0}C_0$
 Extra sign bit **M** -> M = 0, add; M = 1, subtract
 
 ![](../Images/Pasted%20image%2020220517132541.png)
+- Thinking about the addition part:
+	- If M is 0, 0 $\oplus$ A = A. So, we just get out regular 4-bit ripple carry adder
+- Think about the subtraction part:
+	- If M is 1, 1 $\oplus$ A = A'. So, each bit first gets toggled (which gives 1s complement). Also, M acts as the input carry $C_0$, so we account for the 1 added in 2s complement by setting $C_{0}= 1$
 
+**The overflow bit V**
+If $V = C_{4} \oplus C_{3}$ = 0 -> Correct
+Else -> Wrong
+If we're adding a positive and negative number, our answer is always correct
+- A3 is 0, B3 is 1
+- If C3 is 0, C4 is 0, so V is 0 and we're good
+- If C3 is 1, C4 is also 1, so V is 0 and we're good
+
+If we're adding two positive numbers, overflow *might* occur.
+- C4 is 0 if we're adding two positive numbers
+- 0011, 0010
+	- C3 is 0
+	- C4 is 0
+	- So, the output is correct
+- 0111, 0100
+	- C3 is 1
+	- C4 is 0
+	- So, the output is wrong and overflow has occurred
+
+If we're adding two positive numbers, overflow *might* occur.
+- C4 is 1 if we're adding two positive numbers
+- 1011, 1010
+	- C3 is 0 (since we're toggling bits here, C3 being 0 means A3 and B2 are like 0, which means they're "large" in magnitude)
+	- C4 is 1
+	- So, the output is wrong and overflow has occurred
+- 1111, 1100
+	- C3 is 1
+	- C4 is 1
+	- So, the output is correct
+
+Eg. 
 70 -> 01000110
 80 -> 01010000
-**10010110**
-=150
-
-2s complement of this:
-**01101010**
-So, we actually get -106
+**10010110** = -106
 
 -70 -> 10111010
 -80 -> 10110000
 **01101010   (C8 = 1) -> 106**
-
-If $\text{Overflow Bit} = V = C_{4} \oplus C_{3}$ = 0 -> Correct
-Else -> Wrong
-
-Eg.
-M ->0
-A -> 1000
-B -> 1001
-        **(1)0001**
-Carry bits are 0 and 1
-A + B -> 0001, overflow is there
-
-Eg. 1100, 1000
-
-1100
-0111
-0001
-**(1)0100**
-Carry bits are 1, 1, so there is NO overflow
 
 #### Binary Multiplication
 Multiplicand -> B1 B0
@@ -690,7 +711,9 @@ A1 A0
 P0 = A0B0
 P1 =  A0B1 + A1B0
 P2 = Carry + A1B1
-P3
+P3 = Carry
+
+![600](../Images/Pasted%20image%2020220522131715.png)
 
 2x2 multiplication ->4 AND gates and 2 HA
 
@@ -701,11 +724,13 @@ A = A3A2A1A0
 B = B3B2B1B0
 $A_{i} \odot B_{i}= x_i$, where $\odot$ is XNOR gate
 - A = B if $A_{i}= B_{i}\forall i$
-	- A = B if $\Pi A_{i} \odot B_{i} = \Pi x_i$
+	- A = B if $\Pi A_{i} \odot B_{i} = \Pi x_{i}= 1$
 - A > B -> $A_{3}B_{3}' + x_{3}A_{2}B_{2}'+ x_{3} x_{2} A_{1} B_{1}'+ x_{3}x_{2}x_{1}A_{0}B_{0}'$ 
 - A < B -> $A_{3}'B_{3} + x_{3}A_{2}'B_{2}+ x_{3} x_{2} A_{1}' B_{1}+ x_{3}x_{2}x_{1}A_{0}'B_{0}$ 
 
-#### Decoder
+![600](../Images/Pasted%20image%2020220522133306.png)
+
+#### Decoder / Demultiplexer
 **2 x 4 Decoder with Enable Pin**
 Enable 1 -> Chip not ready
 Enable 0 -> Chip ready to work
@@ -718,18 +743,20 @@ Enable | A |  B | D0 | D1 | D2 | D3
 0 | 1 | 0 | 1 | 1 | 0 | 1
 0 | 1 | 1 | 1 | 1 | 1 | 0
 
+![500](../Images/Pasted%20image%2020220522133530.png)
+
 Also acts as demultiplexer
-- if you want your data to go to say D3, we can give A = 1, B = 1
+- if you want your data to go to say D3, we can give A = 1, B = 1. The output is exactly the same in the required pin, and remains always 1 in the other pins
 - after two seconds say we want data to go to D1, we can give A = 0, B = 1
 
 > [!INFO] 
 > It's possible to use the enable pin as in input, in that case we get $2^{(n + 1)}$ outputs
 
-#### Encoders
+#### Priority Encoders
 
 $2^{n}$ bits to n bits
 
-**V**
+**V** -> Validity indicator
 - 0 if all 0s
 - 1 otherwise
 
@@ -744,6 +771,8 @@ X | X | X | 1 | 1 | 1 | 1
 - V = D0 + D1 + D2 + D3
 - x = D2 + D3
 - y = D3 + D2' D1
+
+![500](../Images/Pasted%20image%2020220522134022.png)
 
 #### Multiplexer
 
@@ -760,11 +789,12 @@ S1 | S0  | y
 
 #### Boolean Function implementation
 ###### Using Multiplexer
-Implement f(x,y,z) = sum(1,2,6,7) using 4x1 mux
+Implement $f(x,y,z) = \sum(1,2,6,7)$ using 4x1 mux
 
-![400](../Images/Pasted%20image%2020220520113440.png)
+![300](../Images/Pasted%20image%2020220522134326.png) ![300](../Images/Pasted%20image%2020220520113440.png)
 
-F(A, B, C, D) = sum(1, 3, 4, 11, 12, 13, 14, 15)
+
+$F(A, B, C, D) = \sum(1, 3, 4, 11, 12, 13, 14, 15)$
 ![400](../Images/Pasted%20image%2020220520114148.png)
 
 General:
@@ -773,6 +803,13 @@ n variables
 - 2^(n - 1) inputs
 
 ###### Using Decoder
-# Think this through later
 f(A, B, C) = A'BC + A B C' + ABC
 ![400](../Images/Pasted%20image%2020220520114801.png)
+
+**Binary Coded decimal:**
+Integers from 0 - 9 -> as such
+10 -> 15 are don't cares for any operation
+
+**Gray's Code:** adjacent numbers vary only by one bit
+![200](../Images/Pasted%20image%2020220522154046.png)
+
