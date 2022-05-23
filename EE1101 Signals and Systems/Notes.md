@@ -316,12 +316,15 @@ $z^n$ is the Eigenfunction of system
 $H(z)$ is Eigenvalue of system
 
 If I can decompose x(t):
-$x(t) = sum_{-\infty} ^{\infty} a_{k}e^{s_{k} t} \rightarrow sum_{- \infty} ^{\infty} a_{k}H(s_{k}) e^{sk}$
+$x(t) = \sum_{-\infty} ^{\infty} a_{k}e^{s_{k} t} \rightarrow \sum_{- \infty} ^{\infty} a_{k}H(s_{k}) e^{sk}$
 
-If x(t) is periodic, $x(t) = e^{j w_o}$
-$\phi_{k}= e^{j k w_{o}t}$
-Any arbitrary periodic $x(t) = \sum_{-\infty} ^{\infty}  a_{k}e^{j  w_{o} t}$
-
+**For real functions:**
+$x(t) = \sum_{-\infty} ^{\infty}  a_{k}e^{j  w_{o} t}$
+$x(t) = x^*(t)$
 $a_{-k} = a_{k}^*$
-$a_{k}= a_{-k} ^ {*}$
 
+$x(t) = a_{o}+ \sum_{k = 1} ^{\infty} (2 B_{k} \cos (w_{o} k t) - 2 C_{k} \sin (w_{o} k t)) = a_{o} + 2 A_{k} \cos (w_{o}k t + \theta_k)$
+
+$x(t) = \sum_{-\infty} ^{\infty}  a_{k}e^{j k w_{o} t}$
+$\int_{0}^ {T} x(t) e^{- j n w_{o}t} = a_{n} T$
+$a_{n}= \frac{\int_{0}^ {T} x(t) e^{- j n w_{o}t}}{T}$
