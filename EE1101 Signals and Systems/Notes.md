@@ -318,13 +318,68 @@ $H(z)$ is Eigenvalue of system
 If I can decompose x(t):
 $x(t) = \sum_{-\infty} ^{\infty} a_{k}e^{s_{k} t} \rightarrow \sum_{- \infty} ^{\infty} a_{k}H(s_{k}) e^{sk}$
 
-**For real functions:**
-$x(t) = \sum_{-\infty} ^{\infty}  a_{k}e^{j  w_{o} t}$
-$x(t) = x^*(t)$
-$a_{-k} = a_{k}^*$
+**For real functions**
+- Synthesis equation
+$$x(t) = \sum_{-\infty} ^{\infty}  a_{k}e^{j  w_{o} t}$$
+- Analysis equation
+$$a_{k}= \frac{\int_{0}^ {T} x(t) e^{- j k w_{o}t}}{T}$$
 
 $x(t) = a_{o}+ \sum_{k = 1} ^{\infty} (2 B_{k} \cos (w_{o} k t) - 2 C_{k} \sin (w_{o} k t)) = a_{o} + 2 A_{k} \cos (w_{o}k t + \theta_k)$
 
-$x(t) = \sum_{-\infty} ^{\infty}  a_{k}e^{j k w_{o} t}$
-$\int_{0}^ {T} x(t) e^{- j n w_{o}t} = a_{n} T$
-$a_{n}= \frac{\int_{0}^ {T} x(t) e^{- j n w_{o}t}}{T}$
+**Dirichlet conditions for convergence:**
+- Over a period, $\int_{T} |x(t)| dt < \infty$
+- Finite maxima and minima
+- Finite interval of time -> Finite number of discontinuities
+
+## May 24
+#### Properties of Fourier series
+
+- **Linearity:** $a x(t) + b y(t) \leftrightarrow a a_k + b b_k$
+Proof: Just throw this into the integral and separate stuff
+- **Time shifting:** $x (t - t_{0}) \leftrightarrow a_{k}e^{- j k w_{0} t_{0}}$
+Proof: $a_{k'}= \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} x(t - t_{0}) e^{- k w_{0}t} dt = \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}}$
+- **Frequency Shifting:** $e^{j M w_{0} t} x(t) \leftrightarrow a_{k - M}$
+- **Conjugate Input:** $x^ *(t) \leftrightarrow a_{- k} ^ *$
+- **Time reversal:** $x(-t) \leftrightarrow a_{- k}$
+Just integrate and substitute
+- **Time Scaling:** $x(a t) \leftrightarrow a_k$
+![400](../Images/Pasted%20image%2020220524111422.png)
+- **Differentiation:** $\frac{d x(t)}{d t} \leftrightarrow j k w_{0} a_k$
+- **Integration:** $\int_{- \infty} ^{\infty} x(t) \leftrightarrow \frac {a_{k}} {j k w_0}$
+- **Conjugate symmetry for real x(t):** $a_{k}= a_{- k} ^ *$
+- **Fourier Series of x(t) y(t)**
+$c_{n} = a_{n}* b_{n}$
+
+Parseval's Theorem:
+Power = $\sum_{k = - \infty} ^ {\infty} |a_k|^2$
+
+## May 26
+#### Filter Design and Analysis
+
+- Frequency reshaping
+- Frequency selecting
+
+![400](../Images/Pasted%20image%2020220526221701.png)
+**Taking output over $V_c$, we get low pass filter!**
+$RC \frac{d V_o}{dt} + V_o = V_i$
+
+$RC j w H(j w) e^{j w t} + H(jw) e^{j w t}  = e^{j w t}$
+$H(jw) = \frac{1}{1 + R C j w}$
+
+$|H(jw)| \text{  vs  } w$
+![400](../Images/Pasted%20image%2020220526081850.png)
+
+$\angle H(jw) \text{  vs  } w$
+![400](../Images/Pasted%20image%2020220526082128.png)
+
+**Taking output over $V_r$ we get High pass filter,
+$V_{r}= V_{s} - V_{c} = V_{i} - H(s) V_{i}= (1 - \frac{1}{1 + R C j w})V_{i}$
+
+$H(jw) = \frac{j w R C}{1 + j w R C}$
+
+$|H(jw)| \text{  vs  } w$
+![](../Images/Pasted%20image%2020220526083348.png)
+
+$\angle H(jw) \text{  vs  } w$
+![](../Images/Pasted%20image%2020220526083913.png)
+

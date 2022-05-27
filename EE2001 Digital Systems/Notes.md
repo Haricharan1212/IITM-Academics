@@ -67,3 +67,46 @@ Complement clock
 
 **Some other flip-flops**
 ![600](Pasted%20image%2020220523093614.png)
+
+## May 26
+#### Analysis of synchronous sequential circuits
+# DO THIS PROPERLY LATER
+Eg.
+![500](../Images/Pasted%20image%2020220526112403.png)
+$A_{t + 1} = A_{t} x_{t}+ B_{t}x_{t}$
+$B_{t + 1} = A_{t}' x_{t}$
+$y = (A_{t}+ B_{t}) x_{t}'$
+
+**State Table:**
+
+![400](../Images/Pasted%20image%2020220526112616.png)
+
+**State Diagram**
+![400](../Images/Pasted%20image%2020220526113205.png)
+
+This circuit detects a series of zeroes after ones
+
+Eg.
+![400](../Images/Pasted%20image%2020220526113755.png)
+
+$A_{t + 1} = A \oplus x \oplus y$
+
+**State Table**
+$A_{t + 1}$ | x | y | A
+-- | -- | -- | --
+0 | 0 | 0 | 0
+0 | 0 | 1 | 1
+0 | 1 | 0 | 1
+0 | 1 | 1 | 0
+1 | 0 | 0 | 1
+1 | 0 | 1 | 0
+1 | 1 | 0 | 0
+1 | 1 | 1 | 1
+
+**State Diagram**
+![400](../Images/Pasted%20image%2020220526114214.png)
+
+#### Finite State Machines:
+
+![600](Pasted%20image%2020220526115225.png)
+

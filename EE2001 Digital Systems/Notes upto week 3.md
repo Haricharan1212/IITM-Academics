@@ -698,6 +698,32 @@ Eg.
 -80 -> 10110000
 **01101010   (C8 = 1) -> 106**
 
+## May 26
+#### Half Subtractor
+A | B | D | $B_0$
+-- | -- | -- | --
+0 | 0 | 0 | 0
+0 | 1 | 1 | 1
+1 | 0 | 1 | 0
+1 | 0 | 0 | 0
+
+$D = A \oplus B$
+$C = A' B$
+
+#### Full Subtractor
+A - B - C
+A | B | C | D | $B_0$
+-- | -- | -- | -- | --
+0 | 0 | 0 | 0 | 0
+0 | 0 | 1 | 1 | 1
+0 | 1 | 0 | 1 | 1
+0 | 1 | 1 | 0 | 1
+1 | 0 | 0 | 1 | 0
+1 | 0 | 1 | 0 | 0
+1 | 1 | 0 | 0 | 0
+1 | 1 | 1 | 1 | 1
+D = $A \oplus B \oplus C$
+
 #### Binary Multiplication
 Multiplicand -> B1 B0
 Multiplier -> A1 A0
