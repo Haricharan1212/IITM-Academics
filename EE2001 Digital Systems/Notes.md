@@ -92,7 +92,7 @@ Eg.
 $A_{t + 1} = A \oplus x \oplus y$
 
 **State Table**
-$A_{t + 1}$ | x | y | A
+A | x | y | $A_{t + 1}$
 -- | -- | -- | --
 0 | 0 | 0 | 0
 0 | 0 | 1 | 1
@@ -110,3 +110,42 @@ $A_{t + 1}$ | x | y | A
 
 ![600](Pasted%20image%2020220526115225.png)
 
+**JK Flip - Flop**
+State Table
+
+$J_{A} = B$
+$K_{A} = Bx'$
+$J_{B} = x'$
+$K_{B} = A \oplus x$
+
+$A_t$ | $B_t$ | x | $A_{t + 1}$ | $B_{t + 1}$ | $J_A$ | $K_A$ | $J_B$ |  $K_B$
+-- | -- | -- | -- | -- | -- | -- | -- | --
+0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0
+0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1
+0 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 0
+0 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 1
+1 | 0 | 0 | 1 | 1 | 0 | 0 | 1 | 1
+1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0
+1 | 1 | 0 | 0 | 0 | 1 | 1 | 1 | 1
+1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0
+
+![400](../Images/Pasted%20image%2020220527103722.png)
+
+**T Flip Flop**
+
+## May 27
+#### State Reduction
+
+Eg.
+![400](../Images/Pasted%20image%2020220527105619.png)
+
+![400](../Images/Pasted%20image%2020220527105741.png)
+
+![](../Images/Pasted%20image%2020220527110348.png)
+
+Design Procedure:
+- Derive state table
+- Reduce number of states
+- Assign unique binary value for each state
+- Obtain binary coded state table
+- 
