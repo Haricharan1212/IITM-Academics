@@ -148,4 +148,33 @@ Design Procedure:
 - Reduce number of states
 - Assign unique binary value for each state
 - Obtain binary coded state table
-- 
+- Choose type of flip flops to be used
+- Derived simplified flip-flop input equation
+- Draw logic circuit
+
+**Three bit counter**
+4 states are required
+- 2 bits/flip-flops
+- 1 input
+
+![400](../Images/Pasted%20image%2020220527111629.png)
+
+$A_t$ | $B_t$ | x | $A_{t + 1}$ | $B_{t + 1}$ | y
+-- | -- | -- | -- | -- | -- 
+0 | 0 | 0 | 0 | 0 | 0 
+0 | 0 | 1 | 0 | 1 | 0 
+0 | 1 | 0 | 0 | 0 | 0 
+0 | 1 | 1 | 1 | 0 | 0 
+1 | 0 | 0 | 0 | 0 | 0 
+1 | 0 | 1 | 1 | 1 | 0 
+1 | 1 | 0 | 0 | 0 | 1 
+1 | 1 | 1 | 1 | 1 | 1 
+
+$A_{t + 1} = x(A_{t}+ B_{t})$
+$B_{t + 1} = x(A_{t} + B_{t}')$
+
+#### Synthesis using JK Flip-flop
+
+![](../Images/Pasted%20image%2020220527114249.png)
+
+- Use excitation table
