@@ -390,4 +390,23 @@ Eg. Square wave
 $a_{k}= \frac{\sin (k w_{0} T_{1})}{\frac{k w_{0}T}2}$
 $T a_{k}= \frac{2}{ k w_{0}}\sin (k w_{0} T_{1})$
 
-![](../Images/Pasted%20image%2020220601092555.png)
+![](../Images/Pasted%20image%2020220601092849.png)
+As $T \rightarrow \infty$, it attains value of the *envelope*
+
+$\tilde x(t) = \sum_{-\infty} ^{\infty} a_{k}e^{j k w_{0}t}$
+$a_{k}= \frac 1T \int_{- \infty} ^ {\infty} \tilde x(t) e^{- j k w_{0} t} dt$
+Spectrum$= a_k T = X(jk w_{0}) = \int_{- \infty} ^{\infty} x(t) e^{- j k w_{0}t} dt$
+$\tilde x(t) = \frac {1}{2 \pi} \sum_{-\infty} ^{\infty} X(j k w_{0}) e^{j k w_{0}t} w_{0}= \frac{1}{2 \pi} \int_{- \infty} ^{\infty} X(j w) e^{j w t} dw = x(t)$
+
+> [!important] FOURIER TRANSFORM FORMULAE
+> **Fourier transform**
+> $X(jw) = \int_{- \infty} ^{\infty} x(t) e^{- j w t} dt$
+> **Inverse Fourier Transform**
+> $x(t) = \frac{1}{2 \pi} \int_{- \infty} ^{\infty} X(j w) e^{j w t} dw$
+
+> [!tip] AWESOME DUAL
+> Rectangular pulse in time domain -> Sinc in frequency domain
+> $X(jw) = \frac {2}{\omega} \sin(w T)$
+> Rectangular pulse in frequency domain -> Sinc in time domain
+> $x(t) = \frac{1}{\pi t} \sin(W t)$
+

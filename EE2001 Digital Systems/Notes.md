@@ -99,6 +99,14 @@ J | K | D | Q (t + 1)
 1 | 0 | 1 | 1
 1 | 1 | 1 | Q'
 
+**Excitation Tables**
+$A_t$ | $A_{t + 1}$ | $J_A$/$J_B$ | $K_A$/$J_B$
+-- | -- | -- | --
+0 | 0 | 0 | X
+0 | 1 | 1 | X
+1 | 0 | X | 1
+1 | 1 | X | 0
+
 **T flip-flop**
 set J = K in JK flip-flop
 
@@ -110,6 +118,35 @@ T | Q(t + 1)
 1  | Q'(t)
 
 $Q(t + 1) = T \oplus Q$
+
+**Excitation Table:**
+
+$A_t$ | $A_{t + 1}$ | T 
+-- | -- | -- 
+0 | 0 | 0
+0 | 1 | 1
+1 | 0 | 1
+1 | 1 | 0
+
+**SR Flip-flop**
+
+S | R | Q | Q'
+-- | -- | -- | --
+0 | 0 | No change | No change
+0 | 1 | 0 | 1
+1 | 0 | 1 | 0
+1 | 1 | 1 | 1
+
+![](../Images/Pasted%20image%2020220601180211.png)
+
+**Excitation Table:**
+
+Q(t)| Q(t + 1) | S | R
+-- | -- | -- | --
+0 | 0 | 0 | X
+0 | 1 | 1 | 0
+1 | 0 | 0 | 1
+1 | 1 | X | 0
 
 ## May 26
 #### Analysis of synchronous sequential circuits
@@ -237,14 +274,6 @@ $A_{t + 1} = x(A_{t}+ B_{t})$
 $B_{t + 1} = x(A_{t} + B_{t}')$
 $y = AB$
 
-**Excitation Tables**
-$A_t$ | $A_{t + 1}$ | $J_A$/$J_B$ | $K_A$/$J_B$
--- | -- | -- | --
-0 | 0 | 0 | X
-0 | 1 | 1 | X
-1 | 0 | X | 1
-1 | 1 | X | 0
-
 **State Table**
 ![](../Images/Pasted%20image%2020220527114249.png)
 
@@ -254,12 +283,6 @@ $A_t$ | $A_{t + 1}$ | $J_A$/$J_B$ | $K_A$/$J_B$
 
 **Excitation Table**
 
-$A_t$ | $A_{t + 1}$ | T 
--- | -- | -- 
-0 | 0 | 0
-0 | 1 | 1
-1 | 0 | 1
-1 | 1 | 0
 
 ![](../Images/Pasted%20image%2020220530091308.png)
 
