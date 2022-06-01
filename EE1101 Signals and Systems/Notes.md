@@ -12,7 +12,7 @@
 	- Digital: amplitude can take discrete values. With "M" different values, it's called an M-ary signal
 	- Analog: amplitude can take any value
 - Even or odd signal
-- Conjugate symmetry x(-t) = x*(t)
+- Conjugate symmetry x(t) = x*(t)
 	- Real part is even, Imaginary part is odd
 - Periodic and aperiodic:
 	- x(t) = x(t + T0), $\omega =  \frac{2 \pi}{T_0}$
@@ -82,7 +82,6 @@ Eg.
 - - x(t) flip about x axis
 
 #### Elementary Signals
-
 ---
 **1. Exponential**
 
@@ -277,8 +276,7 @@ Reason-> Unit impulse function is 0 for n < 0, so as it is causal, unit impulse 
 -**Stability**
 Consider giving a Bounded input x[n] < B.
 $y[n] = \sum_{- \infty} ^{\infty} x[k] h[n - k] < B \sum_{\infty} ^{\infty} |h[k]|$
-
-$\sum\limits_{-\infty}^{\infty} |h[k| < \infty$
+$\sum\limits_{-\infty}^{\infty} |h[k]| < \infty$
 
 ## 18th May
 
@@ -295,7 +293,7 @@ s[n] = h[n] * u[n]
 h[n] = s[n] - s[n - 1]
 
 $s(t) = \int_{-\infty} ^{\infty} u(t - \tau) h(\tau) d \tau = \int_{- \infty} ^{t} h(\tau) d \tau$
-$h = \frac{d s(t)}{d t}$
+$h(t)= \frac{d s(t)}{d t}$
 
 ## 19th May
 
@@ -350,7 +348,7 @@ Just integrate and substitute
 - **Fourier Series of x(t) y(t)**
 $c_{n} = a_{n}* b_{n}$
 
-Parseval's Theorem:
+**Parseval's Theorem:**
 Power = $\sum_{k = - \infty} ^ {\infty} |a_k|^2$
 
 ## May 26
@@ -383,3 +381,13 @@ $|H(jw)| \text{  vs  } w$
 $\angle H(jw) \text{  vs  } w$
 ![](../Images/Pasted%20image%2020220526083913.png)
 
+## June 6
+#### Continuous time Fourier transform
+- A aperiodic signal is periodic with $T \rightarrow \infty$
+- $w \rightarrow 0$
+
+Eg. Square wave
+$a_{k}= \frac{\sin (k w_{0} T_{1})}{\frac{k w_{0}T}2}$
+$T a_{k}= \frac{2}{ k w_{0}}\sin (k w_{0} T_{1})$
+
+![](../Images/Pasted%20image%2020220601092555.png)

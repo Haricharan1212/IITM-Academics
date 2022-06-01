@@ -413,9 +413,7 @@ Eg.
 **Simplification of Kmap**
 ![](../Images/Pasted%20image%2020220509094525.png)
 
-
 **F**
-
 1.
 AB \ CD | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
@@ -700,6 +698,9 @@ Eg.
 
 ## May 26
 #### Half Subtractor
+A  - B
+$B_{0}$ is a boolean that keeps track of if we have to borrow from the next digit
+
 A | B | D | $B_0$
 -- | -- | -- | --
 0 | 0 | 0 | 0
@@ -712,6 +713,7 @@ $C = A' B$
 
 #### Full Subtractor
 A - B - C
+
 A | B | C | D | $B_0$
 -- | -- | -- | -- | --
 0 | 0 | 0 | 0 | 0
