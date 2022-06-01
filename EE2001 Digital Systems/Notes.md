@@ -292,6 +292,12 @@ $T_{A_{2}} = A_{1}A_{0}$
 
 ![](../Images/Pasted%20image%2020220530091559.png)
 
+**Timing Circuits**
+![400](../Images/Pasted%20image%2020220601193618.png)
+
+**Setup time** is defined as the minimum amount of time before the clock edge, during which the data must be held stable i.e. the input should not change within the setup time duration so as to ensure proper data to be latched.
+**Hold time** is defined as the minimum amount of time after the clock edge, during which the data must be held stable i.e. the input should not change within the Hold time duration so as to ensure proper data to be latched.
+
 #### Registers and Counters
 
 **4-bit parallel load registers**
