@@ -268,7 +268,6 @@ Extreme peace
 ![500](../Images/Pasted%20image%2020220531234252.png)
 
 #### Synthesis using JK Flip-flop
-Not peace
 
 $A_{t + 1} = x(A_{t}+ B_{t})$
 $B_{t + 1} = x(A_{t} + B_{t}')$
