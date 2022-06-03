@@ -416,7 +416,7 @@ To get output from a system, multiplication is easier than convolution, so we ca
 #### Properties
 1. Linearity $a x_{1}+ b x_{2}\leftrightarrow a{X_1(jw)}+ b{X_2(jw)}$
 2. Time shifting $x(t - t_{0})\leftrightarrow e^{- j w t_{0}} X(jw)$
-3. Frequency Shifting$e^{j w t_{0}}x(t) \leftrightarrow X(w - w_0)$
+3. Frequency Shifting $e^{j w t_{0}}x(t) \leftrightarrow X(w - w_0)$
 4. Conjugation
 $x^*(t) = X^*(- j w)$
 5. Time and frequency scaling
@@ -428,9 +428,12 @@ $x(t) * y(t) \leftrightarrow X(jw) Y(jw)$
 8. Multiplication
 x(t) y(t) <-> $\frac{1}{2 \pi} \int_{- \infty}^{\infty} X(j \theta) Y(j (w - \theta)) d \theta$
 9. Differentiation $\frac{d x(t)}{dt} \leftrightarrow j w X(jw)$
-10. Integration $\int_{- \infty} ^{\infty} x(t) dt \leftrightarrow \frac{X(jw)}{j w} + X(0) \delta (w)$
+10. Integration $\int_{- \infty} ^{t} x(t) dt \leftrightarrow \frac{X(jw)}{j w} + \pi X(0) \delta (w)$
 11. Differentiation in frequency domain $t x(t) \leftrightarrow j \frac{d X(jw)}{d w}$
 12. Conjugate symmetry for real signal x(t)
-X(jw) = X*(- jw)
+$X(jw) = X^*(- jw)$
 Real parts are equal
 Imaginary parts are negatives of each other
+
+Fourier transform of periodic function
+$X(jw) = \sum_{k = -\infty} ^{\infty} 2 \pi a_{k}\delta (w - w_0)$

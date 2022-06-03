@@ -297,21 +297,49 @@ $T_{A_{2}} = A_{1}A_{0}$
 **Setup time** is defined as the minimum amount of time before the clock edge, during which the data must be held stable i.e. the input should not change within the setup time duration so as to ensure proper data to be latched.
 **Hold time** is defined as the minimum amount of time after the clock edge, during which the data must be held stable i.e. the input should not change within the Hold time duration so as to ensure proper data to be latched.
 
-#### Registers and Counters
+## Registers and Counters
 
-**4-bit parallel load registers**
+#### 4-bit parallel load registers
 
 Holds the output in a given state until you are ready to change the state ("loading")
 
 ![](../Images/Pasted%20image%2020220530093316.png)
 
-**Shift Register**
+#### Shift Register
 
 ![](../Images/Pasted%20image%2020220530093632.png)
 
 Copy contents of Register A into Register B
 
-**Universal Shift register**
-- Both parallel and series
+## June 2
+## Universal Shift register
+- Parallel/serial in, parallel/serial out
 - Shift from left to right and right to left
 
+$S_0$ | $S_1$ | Operation |  
+-- | -- | -- | --
+0 | 0 | No change | $Q_{t + 1} = Q_{t}$
+0 | 1 | Shift right | $A_{3} \rightarrow A_{2} \rightarrow A_{1} \rightarrow A_{0}$
+1 | 0 | Shift left | $A_{0} \rightarrow A_{1} \rightarrow A_{2} \rightarrow A_{3}$
+1 | 1 | Parallel load | Parallel input
+
+![600](../Images/Pasted%20image%2020220602112437.png)
+
+- Clear is used to asynchronously reset the D flip-flop
+
+Eg. 4-bit serial adder by loading through shift resistor and storing sum in another shift register
+
+Present State $Q_t$| Inputs : x | y | Next State $Q_{t + 1}$ = C | S | $J_Q$ | $K_Q$
+-- | -- | -- | -- | -- | -- | --
+0 | 0 | 0 | 0 | 0 | 0 | X 
+0 | 0 | 1 | 0 | 1 | 0 | X
+0 | 1 | 0 | 0 | 1 | 0 | X
+0 | 1 | 1 | 1 | 0 | 1 | X
+1 | 0 | 0 | 0 | 1 | X | 1
+1 | 0 | 1 | 1 | 0 | X | 0 
+1 | 1 | 0 | 1 | 0 | X | 0 
+1 | 1 | 1 | 1 | 1 | X | 0
+
+$J_{Q}= xy$
+$K_{Q} = x'y'$
+S = $x \oplus y \oplus Q_t$
