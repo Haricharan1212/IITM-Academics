@@ -437,3 +437,4 @@ Imaginary parts are negatives of each other
 
 Fourier transform of periodic function
 $X(jw) = \sum_{k = -\infty} ^{\infty} 2 \pi a_{k}\delta (w - w_0)$
+

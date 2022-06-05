@@ -82,6 +82,8 @@ Clk | Y | Q
 > [!IMPORTANT]
 > **Q(t + 1) = D**
 
+> It is example of Moore machine, output is independent of previous state
+
 **Positive triggered D flip-flop:**
 Complement clock
 
@@ -100,6 +102,7 @@ J | K | D | Q (t + 1)
 1 | 1 | 1 | Q'
 
 **Excitation Tables**
+
 $A_t$ | $A_{t + 1}$ | $J_A$/$J_B$ | $K_A$/$J_B$
 -- | -- | -- | --
 0 | 0 | 0 | X
@@ -343,3 +346,69 @@ Present State $Q_t$| Inputs : x | y | Next State $Q_{t + 1}$ = C | S | $J_Q$ | $
 $J_{Q}= xy$
 $K_{Q} = x'y'$
 S = $x \oplus y \oplus Q_t$
+
+## June 3
+#### Counters
+Goes through pre-defined sequence of binary states
+
+#### Ripple counter
+- flip-flop transition triggers the next flip-flop
+
+Clock Cycle | A3 | A2 | A1 | A0
+-- | -- | -- | -- | --
+1 | 0 | 0 | 0 | 0
+2 | 0 | 0 | 0 | 1
+3 | 0 | 0 | 1 | 0
+4 | 0 | 0 | 1 | 1
+5 | 0 | 1 | 0 | 0
+6 | 0 | 1 | 0 | 1
+7 | 0 | 1 | 1 | 0
+8 | 0 | 1 | 1 | 1
+9 | 1 | 0 | 0 | 0
+
+![](../Images/Pasted%20image%2020220603101829.png)
+
+#### Synchronous counter
+- Flip flops triggered by common clock
+
+**Up-Down counter**
+![](../Images/Pasted%20image%2020220603103145.png)
+
+**BCD Counter using T flip-flop**
+
+A3|A2 | A1 | A0 | A3 | A2 | A1 | A0 | y | $T_{A3}$ | $T_{A2}$ | $T_{A1}$ | $T_{A0}$ 
+-- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- 
+0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 
+0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 
+0 | 0 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 
+0 | 0 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | 1 
+0 | 1 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 
+0 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 1 
+0 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1 
+0 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1 
+1 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1
+1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 1
+
+$T_{A0}$ =  1
+$T_{A1}$ = A3' A0
+$T_{A2}$ = A3' A1 A0 (can be simplified further)
+$T_{A3}$ = A3' A2 A1 A0 + A3 A2' A1' A0 (can be simplified further)
+y = A3 A2' A1' A0
+
+#### Binary counter with parallel load
+- We want parallel loads
+
+![](../Images/Pasted%20image%2020220603111328.png)
+
+![](Pasted%20image%2020220603111805.png)
+
+![](Pasted%20image%2020220603112546.png)
+
+![](Pasted%20image%2020220603113218.png)
+
+**Ring counter**
+Inputs going in a cycle
+![](../Images/Pasted%20image%2020220603114524.png)
+
+**Johnson Counter**
+
