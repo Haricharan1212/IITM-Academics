@@ -280,7 +280,7 @@ $y = AB$
 ![](../Images/Pasted%20image%2020220527114249.png)
 
 ## May 30
-#### Counter
+#### 3-bit Counter
 **Synthesis using T flip-flop**
 
 **Excitation Table**
@@ -301,36 +301,38 @@ $T_{A_{2}} = A_{1}A_{0}$
 **Hold time** is defined as the minimum amount of time after the clock edge, during which the data must be held stable i.e. the input should not change within the Hold time duration so as to ensure proper data to be latched.
 
 ## Registers and Counters
+Registers are a group of flip-flops and gates that store data
+
+**Asynchronous register using D flip-flops**
+
+![300](../Images/Pasted%20image%2020220605171919.png)
+- I0, I1, I2, I3 are the inputs stored
+- Clear_b is 1 by default
+- When Clear_b is 0, all flip-flops are set to 0
+
+> [!failure] Problems:
+> The output changes during clock-edge if inputs are changed. There are two ways to "store" the information:
+> - Clock should be held in pause
+> - Input should be held constant
+> 
+Messing around with either of them is not a good idea!
 
 #### 4-bit parallel load registers
 
 Holds the output in a given state until you are ready to change the state ("loading")
 
-![](../Images/Pasted%20image%2020220530093316.png)
+![500](../Images/Pasted%20image%2020220605174407.png)
+
+- When load is 1, Input data is transferred
+- When load is 0, existing data is stored undisturbed
 
 #### Shift Register
+Shifts data to neighbouring flip-flops during each clock cycle
+![](../Images/Pasted%20image%2020220605174706.png)
 
-![](../Images/Pasted%20image%2020220530093632.png)
-
-Copy contents of Register A into Register B
-
-## June 2
-## Universal Shift register
-- Parallel/serial in, parallel/serial out
-- Shift from left to right and right to left
-
-$S_0$ | $S_1$ | Operation |  
--- | -- | -- | --
-0 | 0 | No change | $Q_{t + 1} = Q_{t}$
-0 | 1 | Shift right | $A_{3} \rightarrow A_{2} \rightarrow A_{1} \rightarrow A_{0}$
-1 | 0 | Shift left | $A_{0} \rightarrow A_{1} \rightarrow A_{2} \rightarrow A_{3}$
-1 | 1 | Parallel load | Parallel input
-
-![600](../Images/Pasted%20image%2020220602112437.png)
-
-- Clear is used to asynchronously reset the D flip-flop
-
-Eg. 4-bit serial adder by loading through shift resistor and storing sum in another shift register
+#### Serial Adder
+4-bit serial adder by loading through shift resistor and storing sum in another shift register
+![500](../Images/Pasted%20image%2020220605192240.png)
 
 Present State $Q_t$| Inputs : x | y | Next State $Q_{t + 1}$ = C | S | $J_Q$ | $K_Q$
 -- | -- | -- | -- | -- | -- | --
@@ -347,24 +349,31 @@ $J_{Q}= xy$
 $K_{Q} = x'y'$
 S = $x \oplus y \oplus Q_t$
 
+## June 2
+## Bidirectional Universal Shift register
+- Parallel/serial in, parallel/serial out
+- Shift from left to right and right to left
+
+$S_0$ | $S_1$ | Operation |  
+-- | -- | -- | --
+0 | 0 | No change | $Q_{t + 1} = Q_{t}$
+0 | 1 | Shift right | $A_{3} \rightarrow A_{2} \rightarrow A_{1} \rightarrow A_{0}$
+1 | 0 | Shift left | $A_{0} \rightarrow A_{1} \rightarrow A_{2} \rightarrow A_{3}$
+1 | 1 | Parallel load | Parallel input
+
+- Clear is used to asynchronously reset the D flip-flops
+
+![600](../Images/Pasted%20image%2020220602112437.png)
+
+Diagram:
+![400](Pasted%20image%2020220605191732.png)
+
 ## June 3
 #### Counters
-Goes through pre-defined sequence of binary states
+Subset of register, in which it goes through pre-defined sequence of binary states
 
 #### Ripple counter
-- flip-flop transition triggers the next flip-flop
-
-Clock Cycle | A3 | A2 | A1 | A0
--- | -- | -- | -- | --
-1 | 0 | 0 | 0 | 0
-2 | 0 | 0 | 0 | 1
-3 | 0 | 0 | 1 | 0
-4 | 0 | 0 | 1 | 1
-5 | 0 | 1 | 0 | 0
-6 | 0 | 1 | 0 | 1
-7 | 0 | 1 | 1 | 0
-8 | 0 | 1 | 1 | 1
-9 | 1 | 0 | 0 | 0
+- flip-flop transition triggers the next flip-flop (it's not synchronized by a common clock)
 
 ![](../Images/Pasted%20image%2020220603101829.png)
 
@@ -372,7 +381,8 @@ Clock Cycle | A3 | A2 | A1 | A0
 - Flip flops triggered by common clock
 
 **Up-Down counter**
-![](../Images/Pasted%20image%2020220603103145.png)
+Use T flip-flop instead of JK flip-flop
+![400](../Images/Pasted%20image%2020220603103145.png)
 
 **BCD Counter using T flip-flop**
 
@@ -396,12 +406,14 @@ $T_{A3}$ = A3' A2 A1 A0 + A3 A2' A1' A0 (can be simplified further)
 y = A3 A2' A1' A0
 
 #### Binary counter with parallel load
-- We want parallel loads
+- We want parallel loading capacity, as we often want to start the counter at a particular state instead of some arbitrary state
 
 ![](../Images/Pasted%20image%2020220603111328.png)
 
 ![](Pasted%20image%2020220603111805.png)
 
+
+uplupup
 ![](Pasted%20image%2020220603112546.png)
 
 ![](Pasted%20image%2020220603113218.png)
@@ -411,4 +423,67 @@ Inputs going in a cycle
 ![](../Images/Pasted%20image%2020220603114524.png)
 
 **Johnson Counter**
+# Fill later
 
+## June  6
+#### Programmable Logic Devices
+ 
+                     Programable logic devices
+                                           |
+I/O Block -> Programmable switch matrix -> I/O Block
+
+**Field programmable gate array (FPGA)**
+- Reconfigurability
+- Rapid prototyping
+- Parallel processing (multiple cores)
+- Low latency
+- Low power consumption-> we're only turning on the gates we want
+
+#### Memory
+Read-Only Memory | Random Access Memory
+-- | --
+Non-volatile, i.e. doesn't lose information when powered down | Volatile
+Hard-wired (look-up table)| Faster than a ROM
+"Read" only | Both read and write
+
+#### Random access memory
+
+SRAM | DRAM
+-- | --
+Static RAM | Dynamic RAM
+Latches and flip-flops | Capacitor, needs refreshing
+Retains data for a long timescale | Shorter timescale
+Faster | Slower
+Expensive |  Less expensive
+More power | Less power
+
+Memory Enable | Read/Write | Operation
+-- | -- | --
+0 | X | None
+1 | 0 | Wrote
+1 | 1 | Read
+
+![](../Images/Pasted%20image%2020220606091313.png)
+
+Clocked at 50 MHz
+![600](../Images/Pasted%20image%2020220606091418.png)
+![600](Pasted%20image%2020220606091908.png)
+
+###### Memory Cell
+![](Pasted%20image%2020220606092101.png)
+
+![400](../Images/Pasted%20image%2020220606092450.png)
+
+![600](../Images/Pasted%20image%2020220606092814.png)
+
+> [!failure] Issues
+> k inputs
+> $2^k$ words
+> $2^k$ AND gates with k inputs each
+
+**Coincident decoding**
+Keep track of x and y coordinates, using $2^{k/2}$ bits for x coordinates and $2^{k/2}$ bits for y coordinate.
+
+![](Pasted%20image%2020220606094034.png)
+
+![500](../Images/Pasted%20image%2020220606094258.png)
