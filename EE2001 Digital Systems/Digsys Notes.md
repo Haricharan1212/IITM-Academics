@@ -267,7 +267,6 @@ $B_{t + 1} = x(A_{t} + B_{t}')$
 $y = AB$
 
 #### Synthesis using D Flip-flop
-Extreme peace
 ![500](../Images/Pasted%20image%2020220531234252.png)
 
 #### Synthesis using JK Flip-flop
@@ -284,7 +283,6 @@ $y = AB$
 **Synthesis using T flip-flop**
 
 **Excitation Table**
-
 
 ![](../Images/Pasted%20image%2020220530091308.png)
 
@@ -307,8 +305,9 @@ Registers are a group of flip-flops and gates that store data
 
 ![300](../Images/Pasted%20image%2020220605171919.png)
 - I0, I1, I2, I3 are the inputs stored
-- Clear_b is 1 by default
-- When Clear_b is 0, all flip-flops are set to 0
+- Clear_b
+	- is 1 by default
+	- is 0, all flip-flops are set to 0
 
 > [!failure] Problems:
 > The output changes during clock-edge if inputs are changed. There are two ways to "store" the information:
@@ -317,6 +316,7 @@ Registers are a group of flip-flops and gates that store data
 > 
 Messing around with either of them is not a good idea!
 
+#### Synchronous register
 #### 4-bit parallel load registers
 
 Holds the output in a given state until you are ready to change the state ("loading")
@@ -372,6 +372,7 @@ Diagram:
 #### Counters
 Subset of register, in which it goes through pre-defined sequence of binary states
 
+#### Asynchronous
 #### Ripple counter
 - flip-flop transition triggers the next flip-flop (it's not synchronized by a common clock)
 
@@ -388,7 +389,7 @@ Use T flip-flop instead of JK flip-flop
 
 A3|A2 | A1 | A0 | A3 | A2 | A1 | A0 | y | $T_{A3}$ | $T_{A2}$ | $T_{A1}$ | $T_{A0}$ 
 -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- 
-0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 
+0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 
 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 
 0 | 0 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 
 0 | 0 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | 1 
@@ -412,34 +413,43 @@ y = A3 A2' A1' A0
 
 ![](Pasted%20image%2020220603111805.png)
 
-
-uplupup
 ![](Pasted%20image%2020220603112546.png)
 
-![](Pasted%20image%2020220603113218.png)
+Eg. BCD counter with parallel load
+- ![400](../Images/Pasted%20image%2020220606211734.png)
+All inputs are 0, when A3 A0 are like 11, we reach 1001 we load the counter with 0000
+
+- ![400](Pasted%20image%2020220606211827.png)
+When A3 A1 are like 11, we've hit 1001 and we clear the counter
 
 **Ring counter**
-Inputs going in a cycle
-![](../Images/Pasted%20image%2020220603114524.png)
+Inputs going like 1000, 0100, 0010, 0001, 1000, etc.
 
-**Johnson Counter**
-# Fill later
+For $2^{n}$ timing circuit
+
+**Shift register: Shift input is T3**
+![300](Pasted%20image%2020220606213631.png)
+- $2^n$ flip-flops
+
+**2-bit counter and decoder**
+![300](../Images/Pasted%20image%2020220606212325.png)
+$n$ flip-flops and $2^{n}$ four input and gates
+
+**Johnson Counter/Twisted ring counter/Switch tail counter**
+
+![500](../Images/Pasted%20image%2020220607232222.png)
+
+![500](../Images/Pasted%20image%2020220606215708.png)
+
+For n timing sequences, there are n/2 flip-flops and n gates required, and all are two input gates
 
 ## June  6
-#### Programmable Logic Devices
- 
-                     Programable logic devices
-                                           |
-I/O Block -> Programmable switch matrix -> I/O Block
+#### Memory Units
 
-**Field programmable gate array (FPGA)**
-- Reconfigurability
-- Rapid prototyping
-- Parallel processing (multiple cores)
-- Low latency
-- Low power consumption-> we're only turning on the gates we want
+**Word:** Groups of bits stored by memory units
+Modern computers are 64-bit computers
+**Address:** Integer from $0 \rightarrow 2^k - 1$, where k is the number of address lines
 
-#### Memory
 Read-Only Memory | Random Access Memory
 -- | --
 Non-volatile, i.e. doesn't lose information when powered down | Volatile
@@ -447,6 +457,22 @@ Hard-wired (look-up table)| Faster than a ROM
 "Read" only | Both read and write
 
 #### Random access memory
+
+Diagram of a memory unit and its functionality:
+![400](../Images/Pasted%20image%2020220606091313.png)
+
+Memory Enable | Read/Write | Operation
+-- | -- | --
+0 | X | None
+1 | 0 | Write
+1 | 1 | Read
+
+-> Access time: Time required for read operation
+-> Cycle time: Time required for write operation
+Access time and cycle time < Clock time of CPU
+
+Clocked at 50 MHz, i.e. Time period of one pulse is 20 nsec
+![600](Pasted%20image%2020220611143253.png)
 
 SRAM | DRAM
 -- | --
@@ -456,34 +482,171 @@ Retains data for a long timescale | Shorter timescale
 Faster | Slower
 Expensive |  Less expensive
 More power | Less power
-
-Memory Enable | Read/Write | Operation
--- | -- | --
-0 | X | None
-1 | 0 | Wrote
-1 | 1 | Read
-
-![](../Images/Pasted%20image%2020220606091313.png)
-
-Clocked at 50 MHz
-![600](../Images/Pasted%20image%2020220606091418.png)
-![600](Pasted%20image%2020220606091908.png)
+Address multiplexing is more complicated, as it uses 4 transistors | Address multiplexing is easier, as it uses transistor + capacitor
 
 ###### Memory Cell
+- Stores one bit of information
+- For a RAM with m words and n bit word length, there are m x n memory cells
+
 ![](Pasted%20image%2020220606092101.png)
+
+Select | Read/Write | Input | Output | $Q_+$
+-- | -- | -- | -- | --
+0 | X | X | 0 | Q
+1 | 0 | I | 0 | I
+1 | 1 | X | Q | Q
 
 ![400](../Images/Pasted%20image%2020220606092450.png)
 
+Construction of 4 x  4 RAM
 ![600](../Images/Pasted%20image%2020220606092814.png)
 
 > [!failure] Issues
-> k inputs
-> $2^k$ words
-> $2^k$ AND gates with k inputs each
+> k inputs and $2^k$ words
+> The decoder requires $2^k$ AND gates with k inputs (k + 1, if we have the enable pin) each
 
 **Coincident decoding**
-Keep track of x and y coordinates, using $2^{k/2}$ bits for x coordinates and $2^{k/2}$ bits for y coordinate.
+Keep track of x and y coordinates, using ${k/2}$ bits for x coordinates and ${k/2}$ bits for y coordinate.
+This uses 2 * (32 5-input AND gates) and the memory cell is at the intersection of these two rows and columns.
 
-![](Pasted%20image%2020220606094034.png)
+1k memory, using coincident decoding
+![600](Pasted%20image%2020220606094034.png)
 
+**Address Multiplexing in DRAM**
 ![500](../Images/Pasted%20image%2020220606094258.png)
+Strobes: Essentially enable pins, that enable the data in register to the decoder when 0
+- RAS: Row address strobe
+- CAS: Column address strobe
+First, RAS is made 0, a particular row is chosen, then CAS is made 0, the respective column is chosen, then the data is read/written. After that, both strobes are reset to 0
+---
+#### Programmable Logic Devices
+
+- I/O Block -> Programmable switch matrix -> I/O Block
+- Implemented using AND-OR gates
+
+Programmable Read Only Memory:
+![](Pasted%20image%2020220611210837.png)
+
+Programmable Logic Array:
+![](Pasted%20image%2020220611210953.png)
+
+Programmable Array Logic:
+![](Pasted%20image%2020220611210859.png)
+
+#### Programmable Read only memory (PROM)
+- Memory elements are interconnections patterns along with decoder/OR gates
+- $2^k$ words, each word is n bits long
+![600](Pasted%20image%2020220611210837.png)
+- Programmable OR array is built with fuses intact, fuses broken while programming the device
+
+Eg. 32 x 8 PROM
+![500](Pasted%20image%2020220610102128.png)
+*Note*: Each OR gate is a 32 input OR gate
+
+**Sample truth table**
+![](Pasted%20image%2020220610102436.png)
+
+**Using PROMs to design functions**
+- Each of $A_{0} \dots A_{7}$ can be used as a function 
+
+Eg. Design a combinational circuit using a programmable read only memory to accept a 3-bit number and outputs a binary number equal to square of the input number
+
+$A_2$ | $A_1$ | $A_0$ | $B_5$ | $B_4$ |  $B_3$ |  $B_2$ |  $B_1$ |  $B_0$ 
+-- | -- | -- | -- | -- | -- | -- | -- | --
+0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 
+0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1
+0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0
+0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1
+1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0
+1 | 0 | 1 | 0 | 1 | 1 | 0 | 0 | 1
+1 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0
+1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 1
+
+- $B_{0}= A_{0}$
+- $B_{1}= 0$
+- $B_{2}\dots B_{5}$ all depend on the input, so they the word length has to be 4 
+
+ROM would be an 8x4 ROM, where word length is 4 and we have to address 8 locations.  We can burn appropriate connections corresponding to $B_{5}\dots B_2$ in the above table
+![300](../Images/Pasted%20image%2020220610103638.png)
+
+#### Programmable Logic Array (PLA)
+![](Pasted%20image%2020220611210953.png)
+Both AND gates and OR gates are programmable
+
+Three parts:
+- AND gate inputs are programmable
+- OR gate inputs are also programmable
+- Complemented outputs can be XOR-ed to get proper output
+- Using common outputs is better
+
+**PLA size:**
+- n inputs
+- k 2n-input AND gates
+- m Outputs
+- $2n \times k$ Number of connections between input and AND
+- $m \times k$ connections between AND and OR
+
+Typical PLA size would be $16/48/8 \rightarrow n/k/m$
+
+Eg.
+$F_1 = AB' + AC + A'BC'$
+$F_{2}= (AC + BC)'$
+
+Programming Table
+
+A | B | C | | $F_{1} (T)$ | $F_{2} (C)$
+-- | -- | -- | -- | -- | --
+1 | 0 | - | | 1 | _
+1 | _ | 1 | | 1 | 1
+_ | 1 | 1 | | _ | 1
+0 | 1 | 0 | | 1 | _
+
+![600](../Images/Pasted%20image%2020220610104234.png)
+
+**Eg.**
+$F_1$ = $\sum$ (0, 1, 2, 4)
+$F_2$ = $\sum$ (0, 5, 6, 7)
+
+$F_{1} = A'B' + B'C' + A'C'$
+$F_1' = AB + BC + AC$
+$F_{2}= A'B'C' + AC + AB$
+
+Programming Table
+
+A | B | C | | $F_{1} (C)$ | $F_{2}(T)$
+-- | -- | -- | -- | -- | --
+1 | 1 | - | | 1 | 1
+1 | _ | 1 | | 1 | 1
+_ | 1 | 1 | | 1 | _
+0 | 0 | 0 | | _ | 1
+
+![](../Images/Pasted%20image%2020220610110716.png)
+
+#### Programmable Array Logic
+![](Pasted%20image%2020220611210859.png)
+- Fixed OR array (not as flexible as PLA)
+- Typical 4 inputs and 4 outputs with 3 AND + OR gate at each output
+
+![550](../Images/Pasted%20image%2020220610111803.png)
+
+- Lines $1 \dots 8$
+- Lines 9 and 10 can be used to feed in the first input
+
+Eg.
+W = $\sum$ (2, 12, 13)
+X = $\sum$ (7, 8, 9, 10, 11, 12, 13, 14, 15)
+Y = $\sum$ (0, 2, 3, 4, 5, 6, 7, 8, 10, 11, 15)
+Z = $\sum$ (1, 2, 8, 12, 13)
+
+W = A'B'CD' + A B C'
+X = A + BCD
+Y = A' B + CD + B'D'
+Z = W + AC'D' + A'B'C'D
+![600](Pasted%20image%2020220611220633.png)
+
+#### Field programmable gate array (FPGA)
+- Reconfigurability
+- Rapid prototyping
+- Parallel processing (multiple cores)
+- Low latency
+- Low power consumption-> we're only turning on the gates we want

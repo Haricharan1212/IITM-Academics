@@ -413,28 +413,44 @@ $$Y(jw) = \int_{- \infty} ^{\infty} x(\tau) e^{- j w \tau} H(jw) d \tau = H(jw) 
 
 To get output from a system, multiplication is easier than convolution, so we can take Fourier transforms of h(t) and x(t), multiply, then take inverse Fourier transform to get y(t)
 
-#### Properties
+#### Properties of Fourier Transform
+
 1. Linearity $a x_{1}+ b x_{2}\leftrightarrow a{X_1(jw)}+ b{X_2(jw)}$
+Proof: Trivial
 2. Time shifting $x(t - t_{0})\leftrightarrow e^{- j w t_{0}} X(jw)$
-3. Frequency Shifting $e^{j w t_{0}}x(t) \leftrightarrow X(w - w_0)$
-4. Conjugation
-$x^*(t) = X^*(- j w)$
-5. Time and frequency scaling
-$x(at) = \frac{X(\frac{jw}{a})}{|a|}$
-6. Time reversal 
-x(-t) <-> X(- j w)
-7. Convolution
-$x(t) * y(t) \leftrightarrow X(jw) Y(jw)$
-8. Multiplication
-x(t) y(t) <-> $\frac{1}{2 \pi} \int_{- \infty}^{\infty} X(j \theta) Y(j (w - \theta)) d \theta$
-9. Differentiation $\frac{d x(t)}{dt} \leftrightarrow j w X(jw)$
-10. Integration $\int_{- \infty} ^{t} x(t) dt \leftrightarrow \frac{X(jw)}{j w} + \pi X(0) \delta (w)$
-11. Differentiation in frequency domain $t x(t) \leftrightarrow j \frac{d X(jw)}{d w}$
+Proof: $X(jw) = \int_{- \infty} ^{\infty} x(t - t_{0}) e^{- j w t} dt = \int_{- \infty} ^{\infty} x(u) e^{- j w (u + t_0)} du$
+3. Frequency Shifting $e^{j w_{0} t}x(t) \leftrightarrow X(w - w_0)$
+Proof: Same as above
+4. Conjugation $x^*(t) = X^*(- j w)$
+Proof: $\int_{- \infty} ^{\infty} x^{*}(t) e^{- j w t} dt = \left(\int_{- \infty} ^{\infty} x(t) e^{j w t} dt\right)^{*}= X^*(-jw)$
+5. Time and frequency scaling $x(at) = \frac{X(\frac{jw}{a})}{|a|}$
+Proof: $\int_{- \infty} ^{\infty} x(a t) e^{- j w t} dt = \int_{- \infty} ^{\infty} x(u) e^{\frac{- j w u}{a}} \frac{du}{|a|}$
+6. Time reversal  $x(-t) \leftrightarrow X(- j w)$
+Proof: Trivial
+7. Convolution in time domain $x(t) * y(t) \leftrightarrow X(jw) Y(jw)$
+Proof:
+![500](Pasted%20image%2020220611231646.png)
+8. Multiplication $x(t) y(t) \leftrightarrow \frac{1}{2 \pi} \int_{- \infty}^{\infty} X(j \theta) Y(j (w - \theta)) d \theta$
+![500](Pasted%20image%2020220611233331.png)
+9. Integration $\int_{- \infty} ^{t} x(t) dt \leftrightarrow \frac{X(jw)}{j w} + \pi X(0) \delta (w)$
+Proof:
+![500](Pasted%20image%2020220611235651.png)
+10. Differentiation $\frac{d x(t)}{dt} \leftrightarrow j w X(jw)$
+Proof: 
+![500](Pasted%20image%2020220612000226.png)
+11. Differentiation in frequency domain $- j t x(t) \leftrightarrow \frac{d X(jw)}{d w}$
+Same as above
 12. Conjugate symmetry for real signal x(t)
 $X(jw) = X^*(- jw)$
 Real parts are equal
 Imaginary parts are negatives of each other
+13. Duality $X(t) \leftrightarrow 2\pi x(- jw)$
+![500](Pasted%20image%2020220612002133.png)
 
-Fourier transform of periodic function
+**Fourier transform of periodic function**
 $X(jw) = \sum_{k = -\infty} ^{\infty} 2 \pi a_{k}\delta (w - w_0)$
 
+## June 9th
+#### Laplace Transform
+$H(s) = \int_{- \infty} ^{\infty} h(t) e^{-st} dt$ 
+$X(s) = \int_{- \infty} ^{\infty} x(t) e^{-st} dt$
