@@ -397,6 +397,11 @@ $\tilde x(t) = \frac {1}{2 \pi} \sum_{-\infty} ^{\infty} X(j k w_{0}) e^{j k w_{
 > **Inverse Fourier Transform**
 > $x(t) = \frac{1}{2 \pi} \int_{- \infty} ^{\infty} X(j w) e^{j w t} dw$
 
+**Conditions:**
+- Absolutely integrable
+- Finite number of maxima and minima in finite interval of time
+- Finite number of discontinuities in finite interval of time
+
 > [!tip] AWESOME DUAL
 > Rectangular pulse in time domain -> Sinc in frequency domain
 > $X(jw) = \frac {2}{\omega} \sin(w T)$
@@ -452,5 +457,80 @@ $X(jw) = \sum_{k = -\infty} ^{\infty} 2 \pi a_{k}\delta (w - w_0)$
 
 ## June 9th
 #### Laplace Transform
-$H(s) = \int_{- \infty} ^{\infty} h(t) e^{-st} dt$ 
+For a complex number $s$,
 $X(s) = \int_{- \infty} ^{\infty} x(t) e^{-st} dt$
+
+- If $s = jw$, i.e. s is purely imaginary, $X(s) = X(jw)$, so Laplace transform becomes the Fourier transform
+- We've transformed one variable t into a complex plane s
+
+Eg. $e^{- a t} u(t)$
+- Fourier transform $X(jw)$ exists if Re(a) > 0
+- $X(s) = \frac 1{a + s}$
+![400](Pasted%20image%2020220613111816.png)
+
+Eg. $x(t) = e^{-at} u(-t)$
+$X(s) = \int_{- \infty} ^{\infty} e^{-(a + s) t} dt = \frac{1}{a + s}$
+![400](Pasted%20image%2020220613112202.png)
+Both of above functions have same Laplace transform, so region of convergence has to be specified to identify the function
+
+*Pole:* $s$ at which $X(s) \rightarrow \infty$
+*Zero:* $s$ at which $X(s) \rightarrow 0$
+*Order of pole/zero:* Number of times that pole/zero is repeated
+
+$X(s) = \frac{Nr(s)}{Dr(s)}$
+- If deg(N) > deg (Dr), Infinity is a pole
+- If deg(Nr) = deg (Dr), Infinity is neither pole nor zero
+- If def(Nr) < deg(Dr), Infinity is a zero
+- Apart from that, there are Nr(s) zeroes and Dr(s) poles
+
+If ROC doesn't cover imaginary axis, Fourier transform doesn't exist
+If x(t) is finite over a finite interval, ROC -> Entire $\mathbb{C}$ s plane
+
+## June 14th
+#### Properties of Laplace Transform
+1. The ROC of $X(s)$ consists of strips parallel to the $jw$ axis
+2. ROC shouldn't contain any pole
+3. If $x(t)$ is of a finite duration and integrable, ROC is entire $s$-plane
+4. If $x(t)$ is right-sided function and if the line $Re \{s\} = \sigma_0$ is in the ROC, then all values of s for which $Re \{s\} > \sigma_0$ will be in ROC
+5. If $x(t)$ is left-sided function and if the line $Re \{s\} = \sigma_0$ is in the ROC, then all values of s for which $Re \{s\} < \sigma_0$ will be in ROC
+6. If $x(t)$ is a two-sided function and if $Re\{s\} = \sigma_0$ is within ROC, then the entire ROC will contain a strip of s-plane that includes the line $Re\{s\} = \sigma_0$.
+7. If $X(s)$ is rational, then it's ROC is bounded by poles or extends to infinity and no poles of $X(s)$ are contained in ROC
+8. If $X(s)$ is rational,
+	1. $x(t)$ is right-sided, the ROC is the region to the right side of the rightmost pole
+	2. $x(t)$ is left-sided, the ROC is the region to the left side of the leftmost pole
+
+#### Inverse Fourier Transform
+$x(t) = \frac{1}{2 \pi} \int_{- \infty} ^{\infty} X(\sigma + j w) e^{(\sigma + j w)t} d w$
+$x(t) = \frac{1}{2 \pi j} \int_{\sigma - j w}^{\sigma + j w} X(s) e^{- s t} ds$
+But, this is hard to work with and usually guessing the forward function is easier
+
+#### Properties of Fourier Transform
+1. Linearity
+$a x_1 (t) + b x_2 (t) \leftrightarrow a X_1(s) + b X_2(s)$
+ROC: $R$ is at least $R_1 \cap R_2$
+2. Time shifting
+$x(t - t_0) \leftrightarrow e^{-s t_0} X(s)$
+ROC: No change
+3. Frequency shifting
+$x(t) e^{s_0 t} \leftrightarrow X(s - s_0)$
+ROC shifts to right by $Re \{s_0\}$ units
+4. Time scaling
+$x(a t) \leftrightarrow  \frac{1}{|a|} X(s/a)$
+If a is negative, ROC is aR, is changed to the other half plane if a < 0
+5. Conjugation
+$x^*(t) \leftrightarrow X^*(s^*)$
+ROC: No change
+If $x(t)$ is purely real, zeroes and poles are conjugates of each other
+6. Convolution
+$x_1(t) * x_2(t) \leftrightarrow X_1(s) X_2(s)$
+ROC at least $R_1 \cap R_2$
+7. Differentiation in time domain
+$x(t) \leftrightarrow s X(s)$
+ROC at least R
+8. Differentiation in frequency domain:
+$-t x(t) \leftrightarrow X(s)$
+
+## June 15
+#### Initial and Final value theorem
+**Initial Value theorem:** If $x(t) = 0$ for $t < 0$ and contains no impulse or any higher order singularities at the origin, $x(0^+) = \lim_{x \to 0} s X(s)$
+**Final Value theorem:** If $x(t) = 0$ for $t < 0$ and if $x(t)$ has finite limit as $\lim_{t \to \infty}$, $\lim_{t \to \infty} = \lim_{s \to 0} s X(s)$

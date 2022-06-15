@@ -457,7 +457,6 @@ Hard-wired (look-up table)| Faster than a ROM
 "Read" only | Both read and write
 
 #### Random access memory
-
 Diagram of a memory unit and its functionality:
 ![400](../Images/Pasted%20image%2020220606091313.png)
 
@@ -509,15 +508,15 @@ Construction of 4 x  4 RAM
 Keep track of x and y coordinates, using ${k/2}$ bits for x coordinates and ${k/2}$ bits for y coordinate.
 This uses 2 * (32 5-input AND gates) and the memory cell is at the intersection of these two rows and columns.
 
-1k memory, using coincident decoding
+1024 words memory, using coincident decoding
 ![600](Pasted%20image%2020220606094034.png)
 
 **Address Multiplexing in DRAM**
 ![500](../Images/Pasted%20image%2020220606094258.png)
-Strobes: Essentially enable pins, that enable the data in register to the decoder when 0
+**Strobes**: Essentially enable pins, that enable the data in register to the decoder when 0
 - RAS: Row address strobe
 - CAS: Column address strobe
-First, RAS is made 0, a particular row is chosen, then CAS is made 0, the respective column is chosen, then the data is read/written. After that, both strobes are reset to 0
+First, RAS is made 0, a particular row is chosen, then CAS is made 0, the respective column is chosen, then the data is read/written. After that, both strobes are reset to 1
 ---
 #### Programmable Logic Devices
 
@@ -642,7 +641,65 @@ W = A'B'CD' + A B C'
 X = A + BCD
 Y = A' B + CD + B'D'
 Z = W + AC'D' + A'B'C'D
+
+Programming Table
+
+Product Term | A | B | C | D | w | Output
+-- | -- | -- | -- | -- | -- | -- 
+1 | 1 | 1 | 0 | _ | _ |
+2 | 0 | 0 | 1 | 0 | _ |  w = ABC' + A'B'C D'
+3 | _ | _ | _ | _ | _ |
+  |  
+4 | 1 | _ | _ | _ | _ |
+5 | _ | 1 | 1 | 1 | _ | x = A + BCD
+6 | _ | _ | _ | _ | _ |
+  |  
+7 | 0 | 1 | _ | _ | _ |
+8 | _ | _ | 1 | 1 | _ | y = A'B + CD + B'D'
+9 | _ | 0 | _ | 0 | _ | 
+  |  
+10 | _ | _ | _ | _ | 1 |
+11 | 1 | _ | 0 | 0 | _ | z = w + A C'D' + A'B'C'D
+12 | 0 | 0 | 0 | 1 | _ | 
+
 ![600](Pasted%20image%2020220611220633.png)
+
+#### Sequential Programmable Logic Devices
+![600](../Images/Pasted%20image%2020220613085335.png)
+
+**Eg. Field Programmable logic sequencer**
+- PLA with the output driving a flip-flop
+
+Macro-cell
+![600](../Images/Pasted%20image%2020220613090158.png)
+Output enable (OE): three state buffer
+- if OE is 0, output is not obtained
+- if OE is 1, output is obtained
+
+Eg. 3-bit up counter which counts when input = 1, remains in same state when input is 0
+State Table:
+![400](Pasted%20image%2020220613090300.png)
+$Q_2^+ = Q_2 Q_0' + Q_2Q_1' + Q_2 x' + Q_2' Q_1 Q_0 x$
+$Q_1^+ = Q_1 Q_0' + Q_1 x' + Q_1' Q_0 x$
+$Q_0^+ =  Q_0 x' + Q_0' x$
+
+Eg. Design a PLD circuit using PAL/PLA for detecting 1101 Sequence
+![500](Pasted%20image%2020220613091438.png)
+
+A | B | x | A+ | B+ | y
+-- | -- | -- | -- | -- | --
+0 | 0 | 0 | 0 | 0 | 0
+0 | 0 | 1 | 0 | 1 | 0
+0 | 1 | 0 | 0 | 0 | 0
+0 | 1 | 1 | 1 | 0 | 0
+1 | 0 | 0 | 1 | 1 | 0
+1 | 0 | 1 | 1 | 0 | 0
+1 | 1 | 0 | 0 | 0 | 0
+1 | 1 | 1 | 0 | 1 | 1
+
+$A_+ = A' B x + A B'$
+$B_+ = A'B'x + A B'x' + A B x$
+$y = A B x$
 
 #### Field programmable gate array (FPGA)
 - Reconfigurability
