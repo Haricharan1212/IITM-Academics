@@ -489,22 +489,36 @@ If x(t) is finite over a finite interval, ROC -> Entire $\mathbb{C}$ s plane
 ## June 14th
 #### Properties of Laplace Transform
 1. The ROC of $X(s)$ consists of strips parallel to the $jw$ axis
+Proof: Convergence has nothing to do with the complex part
+
 2. ROC shouldn't contain any pole
+
 3. If $x(t)$ is of a finite duration and integrable, ROC is entire $s$-plane
+Fourier series integral converges for all $s$
+
 4. If $x(t)$ is right-sided function and if the line $Re \{s\} = \sigma_0$ is in the ROC, then all values of s for which $Re \{s\} > \sigma_0$ will be in ROC
+Consider the function $f(t)$, let it be 0 for t < 0 (any other starting position can be time shifted to this)
+![500](Pasted%20image%2020220616214022.png)
+
 5. If $x(t)$ is left-sided function and if the line $Re \{s\} = \sigma_0$ is in the ROC, then all values of s for which $Re \{s\} < \sigma_0$ will be in ROC
+Proof: Likewise
+
 6. If $x(t)$ is a two-sided function and if $Re\{s\} = \sigma_0$ is within ROC, then the entire ROC will contain a strip of s-plane that includes the line $Re\{s\} = \sigma_0$.
+Two sided function = Left-sided + Right-sided function, say at $x = \sigma_0$. Now, ROC is at least intersection of the two regions. If there is an ROC, it is a strip.
+
 7. If $X(s)$ is rational, then it's ROC is bounded by poles or extends to infinity and no poles of $X(s)$ are contained in ROC
+
 8. If $X(s)$ is rational,
 	1. $x(t)$ is right-sided, the ROC is the region to the right side of the rightmost pole
 	2. $x(t)$ is left-sided, the ROC is the region to the left side of the leftmost pole
+![600](Pasted%20image%2020220616215428.png)
 
-#### Inverse Fourier Transform
+#### Inverse Laplace Transform
 $x(t) = \frac{1}{2 \pi} \int_{- \infty} ^{\infty} X(\sigma + j w) e^{(\sigma + j w)t} d w$
 $x(t) = \frac{1}{2 \pi j} \int_{\sigma - j w}^{\sigma + j w} X(s) e^{- s t} ds$
 But, this is hard to work with and usually guessing the forward function is easier
 
-#### Properties of Fourier Transform
+#### Properties of Laplace Transform
 1. Linearity
 $a x_1 (t) + b x_2 (t) \leftrightarrow a X_1(s) + b X_2(s)$
 ROC: $R$ is at least $R_1 \cap R_2$
@@ -525,12 +539,12 @@ If $x(t)$ is purely real, zeroes and poles are conjugates of each other
 $x_1(t) * x_2(t) \leftrightarrow X_1(s) X_2(s)$
 ROC at least $R_1 \cap R_2$
 7. Differentiation in time domain
-$x(t) \leftrightarrow s X(s)$
+$x'(t) \leftrightarrow s X(s)$
 ROC at least R
 8. Differentiation in frequency domain:
-$-t x(t) \leftrightarrow X(s)$
+$-t x(t) \leftrightarrow X'(s)$
 
 ## June 15
 #### Initial and Final value theorem
 **Initial Value theorem:** If $x(t) = 0$ for $t < 0$ and contains no impulse or any higher order singularities at the origin, $x(0^+) = \lim_{x \to 0} s X(s)$
-**Final Value theorem:** If $x(t) = 0$ for $t < 0$ and if $x(t)$ has finite limit as $\lim_{t \to \infty}$, $\lim_{t \to \infty} = \lim_{s \to 0} s X(s)$
+**Final Value theorem:** If $x(t) = 0$ for $t < 0$ and if $x(t)$ has finite limit as $\lim_{t \to \infty}$, $\lim_{t \to \infty} x(t)= \lim_{s \to 0} s X(s)$
