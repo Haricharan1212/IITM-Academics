@@ -759,3 +759,44 @@ $z = x_1x_2y$
 
 **Race conditions**
 The process of obtaining the logic circuit from the flow table is not always simple
+11 -> 00  or 01 -> 10: might go through some intermediate state, which is fine
+
+Eg.
+
+$x/y_1y_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | ==00== |  |  | 
+1 | 11 | 11 | ==11== | 11
+00 -> 11
+00 -> 01 -> 11
+00 -> 10 -> 11
+This is *non-critical race condition*
+
+Eg.
+
+$x/y_1y_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | ==00== |  |  | 
+1 | 11 | ==01== | ==11== | ==10==
+00 -> 11 if delays are equal
+00 -> 01 or 00 -> 10 if delays are unequal
+This is *critical race condition*
+
+Eg.
+
+$x/y_1y_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | ==00== |  |  | 
+1 | 11 | ==01== | 01 | 11
+
+
+$x/y_1y_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | ==00== |  |  | 
+1 | 11 | 11 | ==11 ==| ==10==
+
+$x/y_1y_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | ==00== |  |  | 
+1 | 01 | 11 | 10 | 01
+
