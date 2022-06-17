@@ -707,3 +707,55 @@ $y = A B x$
 - Parallel processing (multiple cores)
 - Low latency
 - Low power consumption-> we're only turning on the gates we want
+
+## June 17
+#### Asynchronous sequential circuits
+
+![500](../Images/Pasted%20image%2020220617102535.png)
+
+Eg.
+![400](Pasted%20image%2020220617103602.png)
+
+$x/y_1y_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | 0 | 1 | 1 | 0
+1 | 0 | 0 | 1 | 1
+
+$x/y_1y_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | 0 | 1 | 1 | 0
+1 | 1 | 1 | 0 | 0
+
+**Transition Table**
+
+$x/y_1y_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | 00 | 11 | 11 | 00
+1 | 01 | 01 | 10 | 10
+
+Stable states -> 00, 11, 01, 10
+If any other states are attained, we change to some other state in the next instant
+
+Eg.
+**Flow Table**
+Two state output with two inputs and one output
+$y / x_1x_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+a | a, 0 | a, 0 | a, 0 | b, 0
+b | a, 0 | a, 0 | b, 0 | b, 0
+
+$y / x_1x_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | 0 | 0 | 0 | 1
+1 | 0 | 0 | 1 | 1
+$y = x_1x_2' + x_1y$
+
+$y / x_1x_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | 0 | 0 | 0 | 0
+1 | 0 | 0 | 1 | 0
+$z = x_1x_2y$
+![400](Pasted%20image%2020220617105409.png)
+
+**Race conditions**
+The process of obtaining the logic circuit from the flow table is not always simple
