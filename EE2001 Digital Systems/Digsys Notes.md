@@ -4,7 +4,7 @@
 ## May 23
 ### Sequential circuits
 ![500](../Images/Pasted%20image%2020220523082447.png)
-Specified by a time sequency of inputs, outputs, internal states
+Specified by a time sequence of inputs, outputs, internal states
 
 - Synchronous -> 
 	- happens at a particular clock frequency
@@ -738,11 +738,11 @@ If any other states are attained, we change to some other state in the next inst
 
 Eg.
 **Flow Table**
-Two state output with two inputs and one output
+Two states with two inputs and one output
 $y / x_1x_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 a | a, 0 | a, 0 | a, 0 | b, 0
-b | a, 0 | a, 0 | b, 0 | b, 0
+b | a, 0 | a, 0 | b, 1 | b, 0
 
 $y / x_1x_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
@@ -788,15 +788,76 @@ $x/y_1y_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 0 | ==00== |  |  | 
 1 | 11 | ==01== | 01 | 11
+00 -> 01
+00 -> 10 -> 11 -> 01
+*Non-critical race condition*
 
-
+Eg.
 $x/y_1y_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 0 | ==00== |  |  | 
-1 | 11 | 11 | ==11 ==| ==10==
+1 | 11 | 11 | ==11==| ==10==
+00 -> 01 -> 
+
 
 $x/y_1y_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 0 | ==00== |  |  | 
 1 | 01 | 11 | 10 | 01
+
+![400](Pasted%20image%2020220620025639.png)
+
+$y = (x_1y)'x_2$
+
+$y/x_1x_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | 0 | 1 | ==1== | 0
+1 | 0 | 1 | ==0== | 0
+Unstable circuit
+
+**Analysis**
+- Determine all feedback loops
+- Derive Boolean function for each $y_i$
+- Plot each y in a map
+- Combine all maps (transition table)
+- Identify and circle stable states
+- Identify race conditions
+
+**SR latch:**
+Y = ((S+y)' + R)' = (S + y)R' = R'S + R'y
+y / SR | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | ==0== | ==0== | ==0== | 1
+1 | ==1== | 0 | 0 | ==1==
+11 -> 00
+S -> 0 first y -> 0
+R -> 0 first y -> 1
+- we have to ensure $SR = 0$ to prevent 11 state
+
+Eg.
+Y1 = (R1 + (S1 + y1)')' = R1'(S1 + y1) = (x1 + x2)(x1y2 + y1) = (x1 + x2)(x1 + y1) (y1 + y2)
+Y2 = R2'(S2 + y2) = (x2 + y1')(x1 x2 + y2) = (x2 + y1')(x1 + y2) (x2 + y2)
+
+Transition Table:
+$y_1 y_2 /x_1 x_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+00 | ==00== | ==00== | 01 | ==00==
+01 | ==01== | ==01== | 11 | 11
+11 | 00 | ==11== | ==11== | 10
+10 | 00 | ==10== | 11 | ==10==
+For each input, at least one stable state -> stable
+
+Race condition:
+11 -> 00 for input 01:
+y1 = 0: final state 01 instead 00
+
+**Implementation of circuit using SR latch**
+y = x1x2' + x1y
+y / x1x2 | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | 0 |  0 | 0 | 1
+1 | 0 | 0 | 1 | 0
+
+**Hazards** -> Malfunction/switching transient due to unequal delays
+Static one hazard:
 

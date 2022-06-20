@@ -248,10 +248,10 @@ $$y(t) = \int_{-\infty} ^{\infty} x(\tau) h(t - \tau) d \tau = x(\tau) * h(t)$$
 $y[n] = \sum_{-\infty} ^{\infty} x[k] x[n - k] = \sum_{-\infty} ^{\infty} x[n - k] x[k]$
 (Property of reversing summation)
 
--** Distributive property
+- **Distributive property
 $x[n] * (h_1[n] + h_2[n]) = x[n] * h_1[n] + x[n] * h_2[n]$**
 Proof: $y[n] = \sum_{- \infty} ^{\infty} x[k] (h_{1} [n - k] + h_{2}[n- k]) = = \sum_{- \infty} ^{\infty} x[k] h_{1}[n - k] + \sum_{-\infty}^{\infty} x[k] h_{2}[n - k] = y_1[n] + y_2[n]$
--**Associative property**
+- **Associative property**
 $(x[n] * h1[n]) * h2[n] = x[n] * (h1[n] * h2[n])$
 
 x(t) -> S1 -> y1(t) -> S2 -> y2(t)
@@ -261,19 +261,19 @@ Using commutativity,
 $(x[n] * h_1[n]) * h_2[n] = (x[n] * h_2[n]) * h_1[n]$
 If we're passing a signal x(t) through many LTI systems, order doesn't matter.
 
--**For memoryless systems**
+- **For memoryless systems**
 $h[n] = A \delta [n]$
 $y[n] = \sum_{- \infty} ^{\infty} x[k] A \delta [n - k] = A x[n]$
 
--**Invertibility**
+- **Invertibility**
 $x[n] * (h_1[n] * h_{2}[n])= x[n] = x[n] * \delta[n]$
 $\implies h_{1}[n] * h_{2}[n] = \delta[n]$
 
--**Causality**
+- **Causality**
 $h[n] < 0 \hspace{5 px} \text{for} \hspace{5 px}n < 0$
 Reason-> Unit impulse function is 0 for n < 0, so as it is causal, unit impulse response is also 0 for n < 0
 
--**Stability**
+- **Stability**
 Consider giving a Bounded input x[n] < B.
 $y[n] = \sum_{- \infty} ^{\infty} x[k] h[n - k] < B \sum_{\infty} ^{\infty} |h[k]|$
 $\sum\limits_{-\infty}^{\infty} |h[k]| < \infty$
@@ -305,7 +305,7 @@ $x(t) = e^{s t}$
 $y(t) = \int_{- \infty} ^{\infty} h(\tau) e^{s(t - \tau)} d \tau = e^{-st} \int_{- \infty} ^{\infty} h(\tau) e^{- s \tau} d \tau = e^{st} H(s)$
 
 $e^{st}$ -> Eigenfunction of system
-H(s) -> Eigenvalue of the system
+H(s) -> Eigenvalue of the system -> System function or Transfer function
 
 **DT system**
 $x[n] = z^n$
@@ -548,3 +548,15 @@ $-t x(t) \leftrightarrow X'(s)$
 #### Initial and Final value theorem
 **Initial Value theorem:** If $x(t) = 0$ for $t < 0$ and contains no impulse or any higher order singularities at the origin, $x(0^+) = \lim_{x \to 0} s X(s)$
 **Final Value theorem:** If $x(t) = 0$ for $t < 0$ and if $x(t)$ has finite limit as $\lim_{t \to \infty}$, $\lim_{t \to \infty} x(t)= \lim_{s \to 0} s X(s)$
+
+**Causality:** If system is causal, its ROC lies to the right of the rightmost pole. If H(s) ROC lies in the right of the rightmost pole and H(s) is rational, system is causal.
+*Proof:*
+- In time domain, $h(t) = 0$ for $t < 0$
+So, h(t) is right sided function, and ROC is to the right of rightmost pole
+- If H(s) ROC lies in the right of the rightmost pole and H(s) is rational, h(t) is right sided. Also, if it's a rational function, it can be written as *sum of exponential functions * u(t)* or  *-sum of exponential function * u(-t)* in time domain. Since it's right sided also, h(t) is causal.
+
+**Stability:** ROC must include $jw$ axis
+*Proof:* $\int_{- \infty} ^{\infty} |h(t)| dt$ is finite.
+$\int_{- \infty} ^{\infty} |h(t)| dt <= \int_{- \infty} ^{\infty} h(t) dt = H(0)$ exists. So, 0 is in ROC and hence $jw$-axis is in ROC
+
+**Both Stable and Causal:** $Re(\text{all poles}) < 0$.
