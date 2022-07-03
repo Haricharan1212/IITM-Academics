@@ -433,7 +433,7 @@ For $2^{n}$ timing circuit
 
 **2-bit counter and decoder**
 ![300](../Images/Pasted%20image%2020220606212325.png)
-$n$ flip-flops and $2^{n}$ four input and gates
+$n$ flip-flops and $2^{n}$ n input and gates
 
 **Johnson Counter/Twisted ring counter/Switch tail counter**
 
@@ -714,7 +714,7 @@ $y = A B x$
 ![500](../Images/Pasted%20image%2020220617102535.png)
 
 Eg.
-![400](Pasted%20image%2020220617103602.png)
+![400](../Images/Pasted%20image%2020220617103602.png)
 
 $x/y_1y_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
@@ -739,6 +739,7 @@ If any other states are attained, we change to some other state in the next inst
 Eg.
 **Flow Table**
 Two states with two inputs and one output
+
 $y / x_1x_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 a | a, 0 | a, 0 | a, 0 | b, 0
@@ -748,18 +749,20 @@ $y / x_1x_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 0 | 0 | 0 | 0 | 1
 1 | 0 | 0 | 1 | 1
-$y = x_1x_2' + x_1y$
+$Y = x_1x_2' + x_1y$
 
 $y / x_1x_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 0 | 0 | 0 | 0 | 0
 1 | 0 | 0 | 1 | 0
 $z = x_1x_2y$
-![400](Pasted%20image%2020220617105409.png)
+![400](../Images/Pasted%20image%2020220617105409.png)
 
 **Race conditions**
 The process of obtaining the logic circuit from the flow table is not always simple
 11 -> 00  or 01 -> 10: might go through some intermediate state, which is fine
+*Critical Race condition:* End up at different state depending on delays
+Non-critical Race condition: End up at same state. It can cause hazards though
 
 Eg.
 
@@ -793,27 +796,35 @@ $x/y_1y_2$ | 00 | 01 | 11 | 10
 *Non-critical race condition*
 
 Eg.
+
 $x/y_1y_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 0 | ==00== |  |  | 
 1 | 11 | 11 | ==11==| ==10==
-00 -> 01 -> 
+00 -> 01 -> 11
+00 -> 10
+Critical Race condition
 
+Eg.
 
 $x/y_1y_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 0 | ==00== |  |  | 
 1 | 01 | 11 | 10 | 01
+For x = 1, output is unstable and cycles as follows: *00 -> 01 -> 11 -> 10 -> 01 -> 11 -> 10...*
 
-![400](Pasted%20image%2020220620025639.png)
+**Determining Stability**
+![400](../Images/Pasted%20image%2020220620122908.png)
+$Y = (x_1y)'x_2$
 
-$y = (x_1y)'x_2$
+Transition Table:
 
 $y/x_1x_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
-0 | 0 | 1 | ==1== | 0
-1 | 0 | 1 | ==0== | 0
-Unstable circuit
+0 | ==0== | 1 | <mark style="color: red">1</mark> | ==0==
+1 | 0 | ==1== | <mark style="color: red">0</mark> | 0
+
+Unstable circuit, as for input 11, output switches rapidly between two states
 
 **Analysis**
 - Determine all feedback loops
@@ -824,21 +835,65 @@ Unstable circuit
 - Identify race conditions
 
 **SR latch:**
-Y = ((S+y)' + R)' = (S + y)R' = R'S + R'y
+$Y = ((S+y)' + R)' = (S + y)R' = R'S + R'y$
+![400](../Images/Pasted%20image%2020220620123616.png)
+
 y / SR | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 0 | ==0== | ==0== | ==0== | 1
 1 | ==1== | 0 | 0 | ==1==
+- It is stable
+- Race conditions checking
+	- 00 -> 11
+		- 00 -> 01 -> 11
+		    0       0       0
+		- 00 -> 10 -> 11 -> 11  
+		    0        1       0         0
+		- 00 -> 01 -> 11
+		    1        0      0
+		- 00 -> 10 -> 11 -> 11
+		    1        1      0       0
+	- 11 -> 00
+		- **11 -> 10 -> 00**
+		   **0        1       1**
+		- **11 -> 01 -> 00**
+		   **0       0       0**
+		- 11 -> 10 -> 00
+		    1   Unstable
+		- 11 -> 01 -> 11
+		    1 Unstable
+	- 01 -> 10
+		- 01 -> 00 -> 10 -> 10
+		    0       0       1        1
+		- 01 -> 11 -> 10 -> 10
+		    0       0      1        1
+		- 01 -> 00 -> 10
+		    1 Unstable
+		- 01 -> 00 -> 10
+		    1 Unstable
+	- 10 -> 01
+		- 10 -> 00 -> 01
+	        0 Unstable
+		- 10 -> 11 -> 01
+		    0 Unstable
+		- 10 -> 00 -> 01 -> 01
+		    1       1        0       0
+==,		- 10 -> 11 -> 01==
+==,		    1       0==
+
 11 -> 00
 S -> 0 first y -> 0
 R -> 0 first y -> 1
 - we have to ensure $SR = 0$ to prevent 11 state
 
-Eg.
-Y1 = (R1 + (S1 + y1)')' = R1'(S1 + y1) = (x1 + x2)(x1y2 + y1) = (x1 + x2)(x1 + y1) (y1 + y2)
-Y2 = R2'(S2 + y2) = (x2 + y1')(x1 x2 + y2) = (x2 + y1')(x1 + y2) (x2 + y2)
+$Y = ((S+y)' + R)' = (S + y)R' = R'S + R'y + 0 = R'S + R'y + SR = S + R'y$
 
+**Finding Critical Race conditions**
+Eg. 
+
+![600](../Images/Pasted%20image%2020220620142116.png)
 Transition Table:
+
 $y_1 y_2 /x_1 x_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 00 | ==00== | ==00== | 01 | ==00==
@@ -848,16 +903,76 @@ $y_1 y_2 /x_1 x_2$ | 00 | 01 | 11 | 10
 For each input, at least one stable state -> stable
 
 Race condition:
-11 -> 00 for input 01:
-y1 = 0: final state 01 instead 00
+- Input 00
+No 00 -> 11, 11 -> 00, 01 -> 10, 10 -> 01 conditions
+
+- Input 01, state 11
+11 -> 00: can be done when input is 00
+But, $y_1 y_2$ might go as follows:
+- 11 -> 10 -> 00
+- 11 -> 01
+*Critical Race condition*
+
+- Input 01, no other conditions possible
+
+- Input 11, state 11
+11 -> 00, input given must be 00
+- 11 -> 01 -> 01
+- 11 -> 10 -> 00
+*Critical Race condition*
+
+- Input 10, no other conditions possible
 
 **Implementation of circuit using SR latch**
-y = x1x2' + x1y
-y / x1x2 | 00 | 01 | 11 | 10
+Eg. $Y = x_1x_2' + x_1y$
+
+$y / x_1x_2$ | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 0 | 0 |  0 | 0 | 1
-1 | 0 | 0 | 1 | 0
+1 | 0 | 0 | 1 | 1
+
+Excitation Table
+
+y | Y | S | R
+-- | -- | -- | --
+0 | 0 | 0 | X
+0 | 1 | 1 | 0
+1 | 0 | 0 | 1
+1 | 1 | X | 0
+
+**S**
+
+$y / x_1x_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | 0 |  0 | 0 | 1
+1 | 0 | 0 | X | X
+S = $x_1x_2'$
+
+R
+
+$y / x_1x_2$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | X | X | X | 0
+1 | 1 | 1 | 0 | 0
+R = $x_1'$
 
 **Hazards** -> Malfunction/switching transient due to unequal delays
-Static one hazard:
 
+**Static 1 hazard**
+![400](Pasted%20image%2020220620145950.png)
+$x_1 = 1, x_3 = 1, x_2: 1 \rightarrow 0$
+Y becomes 0 for an instant, then becomes 1 again
+
+The function is $Y = x_1 x_2 + x_3 x_2'$
+
+$x_1 / x_2x_3$ | 00 | 01 | 11 | 10
+-- | -- | -- | -- | --
+0 | 0 | 1 | 0 | 0
+1 | 0 | 1 | 1 | 1
+
+Adjacent 1s without common implicant is static 1 hazard
+
+**Static 0 hazard**
+![400](Pasted%20image%2020220620150227.png)
+
+Adjacent 0s without common implicant is static 0 hazard

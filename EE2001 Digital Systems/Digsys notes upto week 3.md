@@ -250,6 +250,7 @@ n variables with OR (uppercase):
 **Consider the function**
 f1(x, y, z) = xyz' + xy'z + xy'z'
 This function is 1 when:
+
 x | y | z
 -- | -- | --
 1 | 1 | 0
@@ -308,6 +309,7 @@ Adjacencies | Literals
 8 | 0
 
 **f2 = Sum(3,5,6,7)**
+
 x \ yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0** | 0 | 0 | 1 | 0
@@ -319,6 +321,7 @@ f2 doesn't change once in x direction, once in y direction, once in z direction
 So, $f2 = xy + yz + zx$
 
 **f1 = Sum(1,4,7)**
+
 x \ yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0** | 0 | 1 | 0 | 0
@@ -326,6 +329,7 @@ x \ yz | 00 | 01 | 11 | 10
 No adjacency, so it's simplified already
 
 **f3** = sum(3,4,6,7)
+
 x \ yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0** | 0 | 0 | *1*| 0
@@ -337,6 +341,7 @@ f3 = yz + xy + xz' = yz + xz'
 So the aim is to cover all minterms.
 
 **f4** = sum (0,2,3,4,5)
+
 x \ yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0** | 1 | 0 | 0 | 1
@@ -346,6 +351,7 @@ x \ yz | 00 | 01 | 11 | 10
 f4 = z' + x y'
 
 **f5** = Sum(1,2,5,6,7) = Prod(0, 3, 4)
+
 x \ yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0** | 0 | 1 | 0 | 1
@@ -365,6 +371,7 @@ A \ BC | 00 | 01 | 11 | 10
 f6 = C + A'B
 
 **Four variable K-maps**
+
 wx \ yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **00** | 0 | 0 | 0 | 0
@@ -415,6 +422,7 @@ Eg.
 
 **F**
 1.
+
 AB \ CD | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **00** | 1 | 1 | 0 | 1
@@ -479,6 +487,7 @@ NAND logic
 Eg. F = $\Sigma (1,2,3,4,5,7)$
 
 1.
+
 A \ BC | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0** | 0 | 1 | 1 | 1
@@ -527,6 +536,7 @@ $x \oplus y = xy' + x'y = (x +  y')(x' + y)$
 -  Using NAND gate: NAND(NAND(x, y'), NAND(x', y))
 
 Eg. $A \oplus B$
+
 AB \ CD | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **00** | 0 | 0 | 0 | 0
@@ -535,6 +545,7 @@ AB \ CD | 00 | 01 | 11 | 10
 **10** | 0 | 0 | 0 | 0
 
 $A \oplus B \oplus C$
+
 AB \ CD | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **00** | 0 | 0 | 1 | 1
@@ -543,6 +554,7 @@ AB \ CD | 00 | 01 | 11 | 10
 **10** | 1 | 1 | 0 | 0
 
 $A \oplus B \oplus C \oplus D$
+
 AB \ CD | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **00** | 0 | 1 | 0 | 1
@@ -594,6 +606,7 @@ x | y | z| | c | s
 1 | 1 |1|| 1 | 1
 
 - **K-map for s**
+- 
 x/yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0**|0|1|0|1 
@@ -602,6 +615,7 @@ x/yz | 00 | 01 | 11 | 10
 $s = xy'z' + x' y z' + x'y'z + xyz= z' (x \oplus y) + z((x \oplus y)') = (x \oplus y) \oplus z$
 
 - **K-map for c**
+- 
 x/yz | 00 | 01 | 11 | 10
 -- | -- | -- | -- | --
 **0**|0|0|1|0 

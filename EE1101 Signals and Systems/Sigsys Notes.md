@@ -546,8 +546,15 @@ $-t x(t) \leftrightarrow X'(s)$
 
 ## June 15
 #### Initial and Final value theorem
+
 **Initial Value theorem:** If $x(t) = 0$ for $t < 0$ and contains no impulse or any higher order singularities at the origin, $x(0^+) = \lim_{x \to 0} s X(s)$
+*Proof:* $\int_{- \infty} ^{\infty} x'(t) e^{-st} dt = \int_{0} ^{\infty} x'(t) e^{-st} dt = s X(s) - x(0^-)$
+$f(0^+) - f(0^-) + \int_{0^+} ^{\infty} f'(t) e^{-st} dt = s X(s) - f(0^-)$
+Taking $\lim_{s \to \infty}$,
+$f(0^+) = \lim_{s \to \infty} s X(s)$
+
 **Final Value theorem:** If $x(t) = 0$ for $t < 0$ and if $x(t)$ has finite limit as $\lim_{t \to \infty}$, $\lim_{t \to \infty} x(t)= \lim_{s \to 0} s X(s)$
+Proof: same as above
 
 **Causality:** If system is causal, its ROC lies to the right of the rightmost pole. If H(s) ROC lies in the right of the rightmost pole and H(s) is rational, system is causal.
 *Proof:*
@@ -560,3 +567,15 @@ So, h(t) is right sided function, and ROC is to the right of rightmost pole
 $\int_{- \infty} ^{\infty} |h(t)| dt <= \int_{- \infty} ^{\infty} h(t) dt = H(0)$ exists. So, 0 is in ROC and hence $jw$-axis is in ROC
 
 **Both Stable and Causal:** $Re(\text{all poles}) < 0$.
+
+**Unilateral Laplace Transform**
+$L\{x(t)\} = \int_{0} ^{\infty} x(t) e^{-st} dt$
+
+$L\{x'(t)\} = s X(s) - x(0^-)$
+$L\{x''(t)\} = s(s X(s) - x(0^-)) - x'(0^-) = s^2 X(s) - s x(0^-) - x'(0^-)$
+
+Given some differential equation, say some $p(D) y = x(t)$
+Zero input response -> set $x(t) = 0$, i.e. $X(s) = 0$
+Zero state response -> set $x(0^-), x'(0^-), x''(0^-)$, etc. to be 0
+
+Final solution = zero input response + zero state response
